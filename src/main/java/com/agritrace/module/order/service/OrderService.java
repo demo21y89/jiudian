@@ -10,7 +10,10 @@ import com.agritrace.module.order.entity.Order;
 import com.agritrace.module.order.repository.OrderRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
@@ -37,11 +40,10 @@ public class OrderService {
         order.setProductId(request.getProductId());
         order.setQuantity(request.getQuantity());
         order.setTotalPrice(product.getPrice().multiply(BigDecimal.valueOf(request.getQuantity())));
-        order.setStatus("待付款");
+        order.setStatus("PENDING");
         order.setShippingAddress(request.getShippingAddress());
         order.setRemark(request.getRemark());
 
-        // 扣减库存
         product.setStock(product.getStock() - request.getQuantity());
         productRepository.save(product);
 
@@ -55,6 +57,12 @@ public class OrderService {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new BusinessException("订单不存在"));
         return toOrderVO(order);
+    }
+
+    public List<OrderVO> listAllOrders() {
+        return orderRepository.findAll().stream()
+                .map(this::toOrderVO)
+                .collect(Collectors.toList());
     }
 
     private OrderVO toOrderVO(Order order) {

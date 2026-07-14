@@ -30,7 +30,7 @@ public class TraceStage {
     @Column(length = 200)
     private String operator;
 
-    @Column(columnDefinition = "JSONB")
+    @Column(columnDefinition = "JSON")
     private String detailData;
 
     private Integer sortOrder;

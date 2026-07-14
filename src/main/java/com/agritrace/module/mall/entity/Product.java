@@ -59,7 +59,7 @@ public class Product {
     @Column(length = 100)
     private String certificationLabel;
 
-    @Column(columnDefinition = "CLOB")
+    @Column(columnDefinition = "LONGTEXT")
     private String extraInfo;
 
     @Column(nullable = false)
@@ -67,6 +67,9 @@ public class Product {
 
     @Column(name = "farmer_id")
     private Long farmerId;
+
+    @Column(nullable = false)
+    private Boolean enabled = true;
 
     @Column(updatable = false)
     private LocalDateTime createTime;

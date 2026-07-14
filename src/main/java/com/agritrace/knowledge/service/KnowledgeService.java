@@ -5,6 +5,7 @@ import com.agritrace.knowledge.dto.KnowledgeVO;
 import com.agritrace.knowledge.entity.KnowledgeDoc;
 import com.agritrace.knowledge.repository.KnowledgeDocRepository;
 import org.springframework.stereotype.Service;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -25,8 +26,10 @@ public class KnowledgeService {
             docs = docRepository.findAll();
         }
 
+        int topK = request.getTopK() != null ? request.getTopK() : 5;
+
         return docs.stream()
-                .filter(d -> d.getEnabled())
+                .filter(d -> d.getEnabled() != null && d.getEnabled())
                 .map(doc -> {
                     KnowledgeVO vo = new KnowledgeVO();
                     vo.setId(doc.getId());
@@ -39,20 +42,36 @@ public class KnowledgeService {
                     return vo;
                 })
                 .sorted((a, b) -> Double.compare(b.getScore(), a.getScore()))
-                .limit(request.getTopK())
+                .limit(topK)
+                .collect(Collectors.toList());
+    }
+
+    public List<KnowledgeVO> listAll() {
+        return docRepository.findAll().stream()
+                .map(doc -> {
+                    KnowledgeVO vo = new KnowledgeVO();
+                    vo.setId(doc.getId());
+                    vo.setTitle(doc.getTitle());
+                    vo.setContent(truncateContent(doc.getContent(), 300));
+                    vo.setCategory(doc.getCategory());
+                    vo.setSource(doc.getSource());
+                    vo.setTags(doc.getTags());
+                    return vo;
+                })
                 .collect(Collectors.toList());
     }
 
     private double calculateRelevance(String title, String content, String query) {
+        if (query == null) return 0;
         String lowerQuery = query.toLowerCase();
         double score = 0;
-        if (title.toLowerCase().contains(lowerQuery)) score += 0.5;
-        if (content.toLowerCase().contains(lowerQuery)) score += 0.3;
+        if (title != null && title.toLowerCase().contains(lowerQuery)) score += 0.5;
+        if (content != null && content.toLowerCase().contains(lowerQuery)) score += 0.3;
         String[] keywords = lowerQuery.split("\\s+");
         for (String kw : keywords) {
             if (kw.length() > 1) {
-                if (title.toLowerCase().contains(kw)) score += 0.1;
-                if (content.toLowerCase().contains(kw)) score += 0.05;
+                if (title != null && title.toLowerCase().contains(kw)) score += 0.1;
+                if (content != null && content.toLowerCase().contains(kw)) score += 0.05;
             }
         }
         return Math.min(score, 1.0);

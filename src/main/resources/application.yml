@@ -1,4 +1,4 @@
-﻿server:
+server:
   port: 8080
 
 spring:
@@ -15,6 +15,11 @@ spring:
   cache:
     type: simple
 
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+
 logging:
   level:
     com.agritrace: DEBUG
@@ -29,3 +34,10 @@ app:
     max-tokens: 4096
     temperature: 0.3
     max-session-history: 20
+  ai:
+    enabled: true
+    base-url: https://api.deepseek.com/v1
+    api-key: sk-827e65009cd04160b83502de312b588c
+    model: deepseek-chat
+    max-tokens: 2048
+    temperature: 0.3

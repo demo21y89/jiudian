@@ -31,10 +31,10 @@ public class TraceRecord {
     @Column(length = 20)
     private String certStatus;
 
-    @Column(columnDefinition = "JSONB")
+    @Column(columnDefinition = "JSON")
     private String stages;
 
-    @Column(columnDefinition = "JSONB")
+    @Column(columnDefinition = "JSON")
     private String pesticideReport;
 
     @Column(length = 100)

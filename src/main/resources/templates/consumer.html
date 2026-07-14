@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>AI溯源商城 — AgriTrace</title><link rel="stylesheet" href="/css/app.css">
+<style>
+  .chat-bubble-assistant{background:#fff;border:1px solid #e8e0d5;border-radius:18px;border-bottom-left-radius:6px;padding:12px 16px;font-size:14px;line-height:1.75;white-space:pre-wrap;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+  .chat-bubble-user{background:linear-gradient(135deg,#a0680a,#d4920e);color:#fff;border-radius:18px;border-bottom-right-radius:6px;padding:12px 16px;font-size:14px;line-height:1.75;white-space:pre-wrap}
+  .typing-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#c9b896;animation:typingBounce 1.3s infinite}
+  .typing-dot:nth-child(2){animation-delay:.15s}.typing-dot:nth-child(3){animation-delay:.3s}
+  @keyframes typingBounce{0%,60%,100%{transform:translateY(0);opacity:.3}30%{transform:translateY(-7px);opacity:1}}
+  .pimg-wrap{height:200px;background-size:cover;background-position:center;position:relative}
+  .msg-row{display:flex;gap:10px;max-width:82%;animation:fadeUp .3s ease}
+  .msg-row.user{flex-direction:row-reverse;align-self:flex-end}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<nav class="topnav"><a href="/page" class="topnav-brand"><div class="bi">🌾</div>AgriTrace</a><div class="topnav-links"><a href="#" onclick="switchTab('chat')" id="nav-chat" class="active">AI对话</a><a href="#" onclick="switchTab('shop')" id="nav-shop">商城</a><a href="#" onclick="switchTab('trace')" id="nav-trace">溯源查询</a><a href="#" onclick="switchTab('orders')" id="nav-orders">我的订单</a><span id="user-info" style="display:none;align-items:center;gap:6px"><span class="badge badge-success" id="ub"></span><button onclick="$.logout()" style="background:none;border:none;cursor:pointer;color:#a3957c;font-size:12px">退出</button></span><a href="/page/login" id="btn-login">登录</a></div></nav>
+
+<div style="max-width:1300px;margin:0 auto;padding:18px 22px">
+
+<!-- ═══ AI对话 ═══ -->
+<div id="tab-chat">
+  <div style="display:grid;grid-template-columns:250px 1fr;gap:12px;height:calc(100vh - 115px)">
+    <div class="card" style="padding:0;display:flex;flex-direction:column">
+      <div style="padding:14px 16px;border-bottom:1px solid rgba(180,160,130,.1)"><h3 style="font-size:14px;color:#2c2416">💬 对话记录</h3></div>
+      <div style="flex:1;overflow-y:auto;padding:8px"><div style="padding:9px 12px;border-radius:10px;background:rgba(212,146,14,.08);color:#a0680a;font-weight:500;font-size:12px">当前对话</div></div>
+      <div style="padding:10px;border-top:1px solid rgba(180,160,130,.1)"><button class="btn btn-outline btn-sm w-full" onclick="document.getElementById('cm').innerHTML='';Toast.info('新对话')" style="justify-content:center">＋ 新对话</button></div>
+    </div>
+    <div class="card" style="padding:0;display:flex;flex-direction:column;overflow:hidden">
+      <div style="padding:12px 18px;border-bottom:1px solid rgba(180,160,130,.1);display:flex;align-items:center;gap:10px;background:#fdf8f2">
+        <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#f5c842,#d4920e);display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;box-shadow:0 3px 12px rgba(212,146,14,.15)">🌾</div>
+        <div><h3 style="font-size:15px;color:#2c2416">AgriTrace AI 智能助手</h3><div style="font-size:11px;color:#2d5a27">● 在线 · DeepSeek · 6项溯源技能</div></div>
+      </div>
+      <div style="padding:10px 16px;display:flex;flex-wrap:wrap;gap:6px;background:#fefbf7">
+        <button class="quick-q" onclick="document.getElementById('ci').value=this.textContent;Chat.send()">山东苹果农残达标吗？</button>
+        <button class="quick-q" onclick="document.getElementById('ci').value=this.textContent;Chat.send()">查批次B20260701的溯源</button>
+        <button class="quick-q" onclick="document.getElementById('ci').value=this.textContent;Chat.send()">推荐优质水果</button>
+        <button class="quick-q" onclick="document.getElementById('ci').value=this.textContent;Chat.send()">有机认证标准是什么</button>
+        <button class="quick-q" onclick="document.getElementById('ci').value=this.textContent;Chat.send()">验证合格证真伪</button>
+      </div>
+      <div style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:14px" id="cm">
+        <div class="msg-row assistant">
+          <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#f5c842,#d4920e);display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;flex-shrink:0">🌾</div>
+          <div><div class="chat-bubble-assistant">你好！我是 AgriTrace AI 智能助手 🌱
+已接入 DeepSeek 大模型，支持：
+🔍 溯源查询  🧪 农残分析  🚚 物流追踪
+📜 法规检索  ✅ 证书验证  🎯 智能推荐
+
+直接提问或点击上方快捷按钮体验~</div><div style="font-size:10px;color:#c9b896;margin-top:3px">刚刚</div></div>
+        </div>
+      </div>
+      <div style="padding:12px 16px;border-top:1px solid rgba(180,160,130,.1);display:flex;gap:8px;background:#fefbf7">
+        <textarea id="ci" placeholder="输入问题，如：山东苹果农残达标吗？" rows="1" style="flex:1;padding:11px 16px;border:2px solid #e0d6c5;border-radius:24px;font-size:14px;resize:none;outline:none;font-family:inherit;transition:border .2s;background:#fff" onfocus="this.style.borderColor='#d4920e'" onblur="this.style.borderColor='#e0d6c5'"></textarea>
+        <button id="cs" style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#d4920e,#a0680a);color:#fff;border:none;cursor:pointer;font-size:17px;flex-shrink:0;box-shadow:0 3px 12px rgba(212,146,14,.2);transition:all .2s" onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform=''">➤</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 商城 ═══ -->
+<div id="tab-shop" class="hidden">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
+    <h2 style="font-size:20px;color:#2c2416">🛒 农产品商城</h2>
+    <div style="display:flex;gap:8px"><input type="text" class="form-input" id="ss" placeholder="搜索商品或产地..." style="width:200px" oninput="filterProducts()"><select class="form-select" id="sc" style="width:120px" onchange="filterProducts()"><option value="">全部分类</option><option value="水果">水果</option><option value="蔬菜">蔬菜</option><option value="谷物">谷物</option><option value="干货">干货</option><option value="禽蛋">禽蛋</option><option value="水产">水产</option></select></div>
+  </div>
+  <div class="pgrid" id="pl"></div>
+</div>
+
+<!-- ═══ 溯源查询 ═══ -->
+<div id="tab-trace" class="hidden">
+  <h2 style="font-size:20px;color:#2c2416;margin-bottom:4px">🔍 农产品全链路溯源查询</h2>
+  <p style="font-size:13px;color:#6b5e4a;margin-bottom:16px">输入溯源码，查看从种植到餐桌的完整链路信息</p>
+  <div class="card" style="margin-bottom:16px"><div style="font-size:12px;font-weight:600;color:#2c2416;margin-bottom:8px">📋 可查询溯源码（点击直接查询）</div><div id="tql" style="display:flex;flex-wrap:wrap;gap:6px"></div></div>
+  <div style="display:flex;gap:8px;margin-bottom:18px"><input type="text" class="form-input" id="ti" placeholder="输入溯源码，如 TRC20260714001" style="max-width:400px"><button class="btn btn-primary" onclick="doTraceQuery()">查询溯源信息</button></div>
+  <div id="tr" class="hidden">
+    <div class="card" style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px"><div><h2 id="tpn" style="font-size:20px;color:#2c2416;margin-bottom:4px">—</h2><div id="tc" style="font-size:12px;color:#a3957c;font-family:monospace;margin-bottom:6px">—</div><div id="tb" style="display:flex;gap:5px;flex-wrap:wrap"></div></div><div style="font-size:48px;opacity:.5">📱</div></div>
+    <h3 style="font-size:15px;color:#2c2416;margin-bottom:12px">📋 全链路溯源时间线</h3>
+    <div id="tt" style="position:relative;padding-left:28px"><div style="position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:linear-gradient(180deg,#d4920e,#2d5a27)"></div></div>
+    <div id="tbc" class="card" style="margin-top:14px;font-size:12px;color:#6b5e4a;display:none"></div>
+  </div>
+</div>
+
+<!-- ═══ 订单 ═══ -->
+<div id="tab-orders" class="hidden">
+  <h2 style="font-size:20px;color:#2c2416;margin-bottom:16px">📦 我的订单</h2>
+  <div class="tbl-wrap"><table><thead><tr><th>订单编号</th><th>商品</th><th>数量</th><th>金额</th><th>状态</th><th>时间</th></tr></thead><tbody id="ot"></tbody></table></div>
+  <div id="oe" class="hidden text-center" style="padding:50px"><div style="font-size:44px;margin-bottom:10px">📭</div><h3>暂无订单</h3><p class="text-muted" style="font-size:13px">去商城选购优质农产品吧</p></div>
+</div>
+</div></div>
+
+<!-- 购买弹窗 -->
+<div id="bm" class="hidden modal-bg" onclick="if(event.target===this)closeBuy()"><div class="modal-box"><h3 id="bmn" style="font-size:18px;color:#2c2416;margin-bottom:4px">—</h3><div style="font-size:12px;color:#a3957c;margin-bottom:4px" id="bmo"></div><div style="font-size:26px;font-weight:700;color:#a0680a;margin-bottom:18px" id="bmp">¥—</div>
+<div style="font-size:12px;font-weight:600;color:#2c2416;margin-bottom:6px">购买数量</div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:14px"><button onclick="changeQty(-1)" style="width:38px;height:38px;border-radius:50%;border:2px solid rgba(180,160,130,.3);background:#fff;font-size:18px;cursor:pointer">−</button><input type="number" id="bmq" value="1" min="1" onchange="updateTotal()" style="width:55px;text-align:center;font-size:16px;font-weight:600;border:2px solid rgba(180,160,130,.3);border-radius:10px;padding:6px;outline:none"><button onclick="changeQty(1)" style="width:38px;height:38px;border-radius:50%;border:2px solid rgba(180,160,130,.3);background:#fff;font-size:18px;cursor:pointer">＋</button></div>
+<div style="font-size:12px;color:#a3957c;margin-bottom:14px">库存：<span id="bms">—</span> | 小计：<b style="color:#a0680a" id="bmst">¥—</b></div>
+<div class="form-group"><label class="form-label">收货地址</label><input type="text" class="form-input" id="bma" placeholder="请输入收货地址"></div>
+<div style="display:flex;gap:8px;margin-top:6px"><button class="btn btn-outline" style="flex:1;justify-content:center" onclick="closeBuy()">取消</button><button class="btn btn-primary" style="flex:1;justify-content:center" onclick="submitOrder()">确认购买</button></div></div></div>
+
+<script src="/js/app.js"></script>
+<script>
+let ap=[],cp=null;
+const IMG={"苹果":"/images/apple.jpg","大米":"/images/rice.jpg","西红柿":"/images/tomato.jpg","番茄":"/images/tomato.jpg","香梨":"/images/pear.jpg","梨":"/images/pear.jpg","鸡蛋":"/images/egg.jpg","土鸡":"/images/egg.jpg","柴鸡":"/images/chicken_egg.jpg","柴鸡蛋":"/images/chicken_egg.jpg","脐橙":"/images/orange.jpg","橙":"/images/orange.jpg","芒果":"/images/mango.jpg","黄瓜":"/images/cucumber.jpg","山药":"/images/yam.jpg","木耳":"/images/fungus.jpg","大闸蟹":"/images/crab.jpg","蟹":"/images/crab.jpg","草莓":"/images/strawberry.jpg","葡萄":"/images/grape.jpg","水蜜桃":"/images/peach.jpg","桃":"/images/peach.jpg","樱桃":"/images/cherry.jpg","沙拉":"/images/salad.jpg","枣":"/images/peach.jpg","玉米":"/images/corn.jpg","土豆":"/images/potato.jpg","马铃薯":"/images/potato.jpg","铁观音":"/images/tea.jpg","茶叶":"/images/tea.jpg"};
+const TR={"红富士苹果":"TRC20260714001","五常大米":"TRC20260714002","有机西红柿":"TRC20260714003","丹东草莓":"TRC20260714004","海南芒果":"TRC20260714005","新疆葡萄":"TRC20260714006","赣南脐橙":"TRC20260714007","无锡水蜜桃":"TRC20260714008","库尔勒香梨":"TRC20260714009","有机土豆":"TRC20260714010","甜玉米":"TRC20260714011","土鸡蛋":"TRC20260714012","安溪铁观音":"TRC20260714013","有机沙拉菜":"TRC20260714014"};
+function gi(n){for(let[k,v]of Object.entries(IMG)){if((n||"").includes(k))return v}return null}
+function gt(n){for(let[k,v]of Object.entries(TR)){if((n||"").includes(k))return v}return null}
+function hi(n){return gi(n)!==null}
+
+function switchTab(t){["chat","shop","trace","orders"].forEach(x=>{document.getElementById("tab-"+x).classList.toggle("hidden",x!==t);document.getElementById("nav-"+x)?.classList.toggle("active",x===t)});if(t==="shop")lp();if(t==="orders")lo();if(t==="trace")ltq()}
+window.switchTab=switchTab;
+function uu(){let l=$.loggedIn();document.getElementById("user-info").style.display=l?"flex":"none";document.getElementById("btn-login").style.display=l?"none":"inline-flex";if(l&&$.user)document.getElementById("ub").textContent=$.user.username}
+
+async function lp(){let g=document.getElementById("pl");g.innerHTML='<div class="text-center" style="padding:40px;grid-column:1/-1"><div class="spinner" style="margin:0 auto"></div><p class="mt-1 text-muted">加载商品...</p></div>';try{let d=await $.get("/products");ap=$.extractList(d);rp(ap)}catch(e){g.innerHTML='<div class="text-center" style="padding:40px;grid-column:1/-1">⚠️ 加载失败</div>'}}
+function rp(list){
+  let g=document.getElementById("pl"),fl=list.filter(p=>hi(p.name));
+  if(!fl.length){g.innerHTML='<div class="text-center" style="padding:50px;grid-column:1/-1"><div style="font-size:44px;margin-bottom:10px">📭</div><h3>暂无商品</h3></div>';return}
+  g.innerHTML=fl.map(p=>{let pr=p.price!=null?Number(p.price).toFixed(2):"—",img=gi(p.name),tc=gt(p.name);return'<div class="pcard"><div class="pimg-wrap" style="background-image:url('+img+')"><div style="position:absolute;top:10px;right:10px"><span class="badge badge-success">可溯源</span></div></div><div class="pbody"><h4>'+p.name+'</h4><div class="porigin">📍 '+p.origin+'</div>'+(tc?'<div style="margin-bottom:10px;padding:6px 10px;background:rgba(45,90,39,.06);border-radius:8px;border-left:3px solid #2d5a27;cursor:pointer" onclick="event.stopPropagation();document.getElementById(\'ti\').value=\''+tc+'\';switchTab(\'trace\');doTraceQuery()" title="点击查询溯源"><span style="font-size:12px;color:#2d5a27;font-weight:600">🔍 溯源码</span><br><span style="font-family:monospace;font-size:11px;color:#4a7c3f">'+tc+'</span></div>':'')+'<div class="pfooter"><div class="pprice">¥'+pr+'<small> /'+(p.unit||"斤")+'</small></div><button class="btn btn-primary btn-sm" onclick="event.stopPropagation();openBuy('+p.id+',\''+p.name+'\','+p.price+',\''+(p.unit||"斤")+'\','+p.stock+',\''+(p.origin||"")+'\')">立即购买</button></div></div></div>'}).join("")
+}
+function filterProducts(){let kw=(document.getElementById("ss")?.value||"").toLowerCase(),cat=document.getElementById("sc")?.value||"",fl=ap.filter(p=>hi(p.name));if(kw)fl=fl.filter(p=>(p.name||"").includes(kw)||(p.origin||"").includes(kw));if(cat)fl=fl.filter(p=>(p.category||"").includes(cat));rp(fl)}
+
+function openBuy(id,name,price,unit,stock,origin){cp={id,name,price,unit,stock,origin};document.getElementById("bmn").textContent=name;document.getElementById("bmo").textContent="📍 "+origin;document.getElementById("bmp").textContent="¥"+Number(price).toFixed(2)+" /"+unit;document.getElementById("bms").textContent=stock;document.getElementById("bmq").value=1;document.getElementById("bmq").max=stock;document.getElementById("bma").value="";updateTotal();document.getElementById("bm").classList.remove("hidden")}
+function closeBuy(){document.getElementById("bm").classList.add("hidden");cp=null}
+function changeQty(d){let el=document.getElementById("bmq"),v=parseInt(el.value)+d;if(v<1)v=1;if(v>parseInt(el.max))v=parseInt(el.max);el.value=v;updateTotal()}
+function updateTotal(){document.getElementById("bmst").textContent="¥"+(cp.price*parseInt(document.getElementById("bmq").value||1)).toFixed(2)}
+async function submitOrder(){if(!$.loggedIn()){Toast.err("请先登录");closeBuy();window.location.href="/page/login";return}let qty=parseInt(document.getElementById("bmq").value)||1,addr=document.getElementById("bma").value.trim()||"默认地址";try{let d=await $.post("/orders",{userId:$.user.id,productId:cp.id,quantity:qty,shippingAddress:addr,remark:""});Toast.ok("购买成功！订单号："+d.data.orderNo);closeBuy();lp()}catch(e){Toast.err("下单失败："+e.message)}}
+
+async function ltq(){try{let d=await $.get("/trace/list"),traces=$.extractList(d);document.getElementById("tql").innerHTML=traces.map(t=>'<span style="padding:5px 12px;border-radius:18px;border:1.5px solid rgba(180,160,130,.25);font-size:12px;cursor:pointer;background:#fff;transition:all .15s" onclick="document.getElementById(\'ti\').value=\''+t.traceCode+'\';doTraceQuery()" onmouseenter="this.style.borderColor=\'#d4920e\';this.style.color=\'#a0680a\'" onmouseleave="this.style.borderColor=\'rgba(180,160,130,.25)\';this.style.color=\'\'">🔍 '+t.traceCode+' — '+t.productName+'</span>').join("")}catch(e){}}
+async function doTraceQuery(){let code=document.getElementById("ti").value.trim();if(!code){Toast.err("请输入溯源码");return}try{let d=await $.post("/trace/query",{traceCode:code.includes("TRC")?code:"",batchNo:code.includes("B")?code:""}),t=d.data||d;document.getElementById("tr").classList.remove("hidden");document.getElementById("tpn").textContent=t.productName||"—";document.getElementById("tc").textContent="溯源码："+(t.traceCode||code)+"  |  批次："+(t.batchNo||"—")+"  |  产地："+(t.origin||"—");let b=document.getElementById("tb");b.innerHTML="";if(t.certValid)b.innerHTML+='<span class="badge badge-success">✅ 合格证有效</span>';if(t.txHash)b.innerHTML+='<span class="badge badge-info">⛓ 区块链存证</span>';b.innerHTML+='<span class="badge badge-warning">👁 扫码'+(t.scanCount+1)+'次</span>';let stages=t.stages||[],tl=document.getElementById("tt");tl.innerHTML=stages.length?stages.map((s,i)=>'<div style="position:relative;margin-bottom:20px"><div style="position:absolute;left:-23px;top:3px;width:12px;height:12px;border-radius:50%;border:2.5px solid #d4920e;background:#fff;z-index:1"></div><div style="font-size:13px;font-weight:600;color:#2c2416;margin-bottom:2px">'+(i+1)+'. '+s.stageName+'</div><div style="font-size:12px;color:#6b5e4a">'+s.description+' — 操作人：'+(s.operator||"—")+' — 地点：'+(s.location||"—")+'</div><div style="font-size:11px;color:#a3957c">'+s.recordTime+'</div></div>').join(""):'<div class="text-center text-muted" style="padding:20px">暂无溯源环节数据</div>';let bc=document.getElementById("tbc");if(t.txHash){bc.style.display="block";bc.innerHTML='⛓ <b>区块链存证哈希：</b>'+t.txHash+'<br><span style="font-size:11px">关键节点已上链FISCO BCOS联盟链，确保数据不可篡改。</span>'}else bc.style.display="none"}catch(e){Toast.err(e.message)}}
+
+async function lo(){let tb=document.getElementById("ot"),em=document.getElementById("oe");try{let d=await $.get("/orders"),orders=$.extractList(d);if(!orders.length){tb.innerHTML="";em.classList.remove("hidden");return}em.classList.add("hidden");tb.innerHTML=orders.map(o=>{let st=o.status||"处理中",sc=st==="COMPLETED"||st==="已完成"?"badge-success":st==="SHIPPED"||st==="运输中"?"badge-info":"badge-warning";return'<tr><td style="font-family:monospace;font-size:11px">'+o.orderNo+'</td><td>商品#'+o.productId+'</td><td>'+o.quantity+'</td><td style="font-weight:600">¥'+(o.totalPrice||0).toFixed(2)+'</td><td><span class="badge '+sc+'">'+st+'</span></td><td style="font-size:11px;color:#a3957c">'+o.createTime+'</td></tr>'}).join("")}catch(e){tb.innerHTML="";em.classList.remove("hidden")}}
+
+document.addEventListener("DOMContentLoaded",()=>{uu();Chat.init({messagesEl:document.getElementById("cm"),inputEl:document.getElementById("ci"),sendBtn:document.getElementById("cs")});lp()});
+</script>
+</body></html>

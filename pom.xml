@@ -44,7 +44,14 @@
             <artifactId>spring-boot-starter-cache</artifactId>
         </dependency>
 
-        <!-- H2 Database (开发模式) -->
+        <!-- MySQL -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- H2 (开发/测试备用) -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>

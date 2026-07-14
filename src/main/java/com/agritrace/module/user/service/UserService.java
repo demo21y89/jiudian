@@ -8,7 +8,10 @@ import com.agritrace.module.user.repository.UserRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -30,10 +33,9 @@ public class UserService {
         }
 
         if (!user.getEnabled()) {
-            throw new BusinessException("账户已被禁用");
+            throw new BusinessException("账号已被禁用");
         }
 
-        // 生成简单令牌（生产环境使用 JWT）
         String token = CodeGenerator.generateSessionId();
         UserVO userVO = toUserVO(user);
         return new LoginResponse(token, userVO);
@@ -56,6 +58,12 @@ public class UserService {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new BusinessException("用户不存在"));
         return toUserVO(user);
+    }
+
+    public List<UserVO> listAllUsers() {
+        return userRepository.findAll().stream()
+                .map(this::toUserVO)
+                .collect(Collectors.toList());
     }
 
     private UserVO toUserVO(User user) {
