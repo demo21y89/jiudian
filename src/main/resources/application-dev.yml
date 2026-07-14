@@ -1,0 +1,23 @@
+﻿spring:
+  datasource:
+    postgresql:
+      jdbc-url: jdbc:postgresql://localhost:5432/agritrace_dev
+      username: postgres
+      password: postgres
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY:sk-your-dev-key}
+
+logging:
+  level:
+    com.agritrace: DEBUG
+    org.springframework.ai: DEBUG
+
+blockchain:
+  enabled: false

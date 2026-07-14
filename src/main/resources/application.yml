@@ -1,0 +1,31 @@
+﻿server:
+  port: 8080
+
+spring:
+  application:
+    name: agri-trace-platform
+  profiles:
+    active: h2
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 20MB
+
+  cache:
+    type: simple
+
+logging:
+  level:
+    com.agritrace: DEBUG
+
+blockchain:
+  enabled: false
+
+app:
+  name: AI Agent 农产品溯源智能交易平台
+  version: 1.0.0
+  agent:
+    max-tokens: 4096
+    temperature: 0.3
+    max-session-history: 20
