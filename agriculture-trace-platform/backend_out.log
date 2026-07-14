@@ -1,0 +1,933 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::               (v2.7.18)
+
+2026-07-14 20:09:21.947  INFO 19548 --- [           main] com.agri.trace.TraceApplication          : Starting TraceApplication v1.0.0 using Java 1.8.0_331 on LAPTOP-EDUB0616 with PID 19548 (E:\Grouptest_git\agriculture-trace-platform\target\agriculture-trace-platform-1.0.0.jar started by Lenovo in E:\Grouptest_git\agriculture-trace-platform)
+2026-07-14 20:09:21.973  INFO 19548 --- [           main] com.agri.trace.TraceApplication          : No active profile set, falling back to 1 default profile: "default"
+2026-07-14 20:09:24.732  INFO 19548 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2026-07-14 20:09:24.768  INFO 19548 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-07-14 20:09:24.768  INFO 19548 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.83]
+2026-07-14 20:09:25.004  INFO 19548 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-07-14 20:09:25.026  INFO 19548 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3000 ms
+2026-07-14 20:09:25.234  INFO 19548 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-07-14 20:09:25.504  INFO 19548 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+Logging initialized using 'class org.apache.ibatis.logging.stdout.StdOutImpl' adapter.
+ _ _   |_  _ _|_. ___ _ |    _ 
+| | |\/|_)(_| | |_\  |_)||_|_\ 
+     /               |         
+                        3.5.5 
+2026-07-14 20:09:26.230  WARN 19548 --- [           main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: b8ce22df-4054-4928-a744-38e8f1f661c4
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-07-14 20:09:26.376  INFO 19548 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@428640fa, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@d9345cd, org.springframework.security.web.context.SecurityContextPersistenceFilter@957e06, org.springframework.security.web.header.HeaderWriterFilter@6404f418, org.springframework.security.web.authentication.logout.LogoutFilter@437da279, com.agri.trace.security.JwtAuthenticationFilter@74235045, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2c1b194a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@66f57048, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2d710f1a, org.springframework.security.web.session.SessionManagementFilter@729d991e, org.springframework.security.web.access.ExceptionTranslationFilter@53ce1329, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@55634720]
+2026-07-14 20:09:26.743  INFO 19548 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2026-07-14 20:09:26.776  INFO 19548 --- [           main] com.agri.trace.TraceApplication          : Started TraceApplication in 5.366 seconds (JVM running for 5.967)
+2026-07-14 20:09:26.796  INFO 19548 --- [           main] com.agri.trace.config.DataInitializer    : 数据库表结构初始化完成
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c7bfdc1]
+JDBC Connection [HikariProxyConnection@1764996806 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will be managed by Spring
+==>  Preparing: SELECT COUNT( * ) AS total FROM user WHERE deleted=0
+==> Parameters: 
+<==    Columns: total
+<==        Row: 3
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c7bfdc1]
+2026-07-14 20:09:26.874  INFO 19548 --- [           main] com.agri.trace.config.DataInitializer    : 已有数据，跳过初始化
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c7bfdc1]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c7bfdc1]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c7bfdc1]
+2026-07-14 20:09:39.485  INFO 19548 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-07-14 20:09:39.506  INFO 19548 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-07-14 20:09:39.508  INFO 19548 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7fe505ed] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@240390440 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT * FROM user WHERE username = ? AND deleted = 0
+==> Parameters: admin(String)
+<==    Columns: id, username, password, real_name, phone, role, avatar, deleted, create_time, update_time
+<==        Row: 1, admin, $2a$10$xWyIy/YcZWLbVRZoifs5IOa0n5G9UZYtvhcsFfq8A/FXSVa7PgQvK, 系统管理员, null, ADMIN, null, 0, 2026-07-14T19:22:34.747, 2026-07-14 11:22:34
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7fe505ed]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2a1dc1c9] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@308662511 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT * FROM batch WHERE batch_no = ?
+==> Parameters: BATCH-F-003(String)
+<==    Columns: id, batch_no, product_id, produce_date, harvest_date, quantity, farm_address, farm_area, soil_type, create_time
+<==        Row: 4, BATCH-F-003, 4, 2026-06-05, 2026-07-05, 1913, 四川眉山生产基地, 70亩, 红壤土, 2026-07-14 19:22:52
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2a1dc1c9]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1392d252] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1472551520 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT * FROM trace_record WHERE batch_id = ? ORDER BY record_time ASC
+==> Parameters: 4(Long)
+<==    Columns: id, batch_id, record_type, record_time, operator, content, detail, attachment, create_time
+<==        Row: 11, 4, 种植, 2026-04-02, null, 完成四川爱媛果冻橙种苗定植, null, null, 2026-07-14 19:22:52
+<==        Row: 12, 4, 施肥, 2026-05-20, null, 施用有机肥500kg/亩, null, null, 2026-07-14 19:22:52
+<==        Row: 13, 4, 灌溉, 2026-06-21, null, 智能滴灌系统灌溉, null, null, 2026-07-14 19:22:52
+<==        Row: 14, 4, 采收, 2026-07-07, null, 人工挑选采收，分级包装, null, null, 2026-07-14 19:22:52
+<==        Row: 15, 4, 加工, 2026-07-13, null, 清洗、分拣、称重、冷链包装, null, null, 2026-07-14 19:22:52
+<==      Total: 5
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1392d252]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1d5d9b2f] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@408472212 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT * FROM pesticide_report WHERE batch_id = ?
+==> Parameters: 4(Long)
+<==    Columns: id, batch_id, report_no, test_date, test_organization, item_name, result, standard_limit, unit, is_compliant, create_time
+<==        Row: 8, 4, REP-49115, 2026-07-05, 农业农村部农产品质量监督检验测试中心, 毒死蜱, 未检出, 0.05, mg/kg, 1, 2026-07-14 19:22:52
+<==        Row: 9, 4, REP-95257, 2026-07-05, 农业农村部农产品质量监督检验测试中心, 多菌灵, 未检出, 0.10, mg/kg, 1, 2026-07-14 19:22:52
+<==        Row: 10, 4, REP-14045, 2026-07-05, 农业农村部农产品质量监督检验测试中心, 啶虫脒, 未检出, 0.05, mg/kg, 1, 2026-07-14 19:22:52
+<==      Total: 3
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1d5d9b2f]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@17f8e8b8] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@331841183 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT * FROM batch WHERE batch_no = ?
+==> Parameters: BATCH-V-008(String)
+<==    Columns: id, batch_no, product_id, produce_date, harvest_date, quantity, farm_address, farm_area, soil_type, create_time
+<==        Row: 30, BATCH-V-008, 30, 2026-03-02, 2026-06-29, 2714, 黑龙江牡丹江生产基地, 53亩, 黄壤土, 2026-07-14 19:22:52
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@17f8e8b8]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@56c5e283] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@934544857 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT * FROM trace_record WHERE batch_id = ? ORDER BY record_time ASC
+==> Parameters: 30(Long)
+<==    Columns: id, batch_id, record_type, record_time, operator, content, detail, attachment, create_time
+<==        Row: 141, 30, 种植, 2026-04-11, null, 完成东北黑木耳种苗定植, null, null, 2026-07-14 19:22:52
+<==        Row: 142, 30, 施肥, 2026-05-26, null, 施用有机肥500kg/亩, null, null, 2026-07-14 19:22:52
+<==        Row: 143, 30, 灌溉, 2026-06-24, null, 智能滴灌系统灌溉, null, null, 2026-07-14 19:22:52
+<==        Row: 144, 30, 采收, 2026-07-07, null, 人工挑选采收，分级包装, null, null, 2026-07-14 19:22:52
+<==        Row: 145, 30, 加工, 2026-07-13, null, 清洗、分拣、称重、冷链包装, null, null, 2026-07-14 19:22:52
+<==      Total: 5
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@56c5e283]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@675996bf] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1338126157 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT * FROM pesticide_report WHERE batch_id = ?
+==> Parameters: 30(Long)
+<==    Columns: id, batch_id, report_no, test_date, test_organization, item_name, result, standard_limit, unit, is_compliant, create_time
+<==        Row: 100, 30, REP-53152, 2026-06-29, 农业农村部农产品质量监督检验测试中心, 啶虫脒, 未检出, 0.05, mg/kg, 1, 2026-07-14 19:22:52
+<==        Row: 101, 30, REP-20782, 2026-06-29, 农业农村部农产品质量监督检验测试中心, 氯氰菊酯, 未检出, 0.20, mg/kg, 1, 2026-07-14 19:22:52
+<==        Row: 102, 30, REP-95722, 2026-06-29, 农业农村部农产品质量监督检验测试中心, 多菌灵, 未检出, 0.10, mg/kg, 1, 2026-07-14 19:22:52
+<==      Total: 3
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@675996bf]
+2026-07-14 20:09:49.630  INFO 19548 --- [nio-8080-exec-4] c.agri.trace.agent.MainCoordinatorAgent  : 工具 trace_query 调用成功
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@36ea1dcc] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@568806405 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT * FROM batch WHERE batch_no = ?
+==> Parameters: BATCH-V-008(String)
+<==    Columns: id, batch_no, product_id, produce_date, harvest_date, quantity, farm_address, farm_area, soil_type, create_time
+<==        Row: 30, BATCH-V-008, 30, 2026-03-02, 2026-06-29, 2714, 黑龙江牡丹江生产基地, 53亩, 黄壤土, 2026-07-14 19:22:52
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@36ea1dcc]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@aa0dae8] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1422271670 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT * FROM pesticide_report WHERE batch_id = ?
+==> Parameters: 30(Long)
+<==    Columns: id, batch_id, report_no, test_date, test_organization, item_name, result, standard_limit, unit, is_compliant, create_time
+<==        Row: 100, 30, REP-53152, 2026-06-29, 农业农村部农产品质量监督检验测试中心, 啶虫脒, 未检出, 0.05, mg/kg, 1, 2026-07-14 19:22:52
+<==        Row: 101, 30, REP-20782, 2026-06-29, 农业农村部农产品质量监督检验测试中心, 氯氰菊酯, 未检出, 0.20, mg/kg, 1, 2026-07-14 19:22:52
+<==        Row: 102, 30, REP-95722, 2026-06-29, 农业农村部农产品质量监督检验测试中心, 多菌灵, 未检出, 0.10, mg/kg, 1, 2026-07-14 19:22:52
+<==      Total: 3
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@aa0dae8]
+2026-07-14 20:09:49.646  INFO 19548 --- [nio-8080-exec-4] c.agri.trace.agent.MainCoordinatorAgent  : 工具 pesticide_analyze 调用成功
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@32a4479f] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@699970218 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT id,title,content,category,source,upload_time FROM knowledge_doc
+==> Parameters: 
+<==    Columns: id, title, content, category, source, upload_time
+<==        Row: 1, GB 2763-2021 食品中农药最大残留限量, GB 2763-2021规定了食品中农药的最大残留限量。水果类：毒死蜱≤0.05mg/kg，多菌灵≤0.10mg/kg。蔬菜类：毒死蜱≤0.05mg/kg。粮食类：毒死蜱≤0.05mg/kg。茶叶类：联苯菊酯≤0.01mg/kg。, 法规, null, 2026-07-14 11:22:35
+<==        Row: 2, GB 14881-2013 食品生产通用卫生规范, GB 14881规定了食品生产过程中原料采购、加工、包装、贮存和运输等环节的卫生要求。, 法规, null, 2026-07-14 11:22:35
+<==      Total: 2
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@32a4479f]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3c0cd31c] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@52949584 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT id,name,category,origin,spec,price,stock,batch_no,image_url,description,trace_level,deleted,status,create_time,update_time FROM product WHERE deleted=0
+==> Parameters: 
+<==    Columns: id, name, category, origin, spec, price, stock, batch_no, image_url, description, trace_level, deleted, status, create_time, update_time
+<==        Row: 1, 山东红富士苹果, 水果, 山东烟台, 5kg/箱, 49.9, 1000, BATCH-F-001, null, 山东烟台红富士苹果，色泽红润，口感脆甜。, AAA, 0, 1, 2026-07-14T19:22:34.990, 2026-07-14 11:22:34
+<==        Row: 2, 五常有机大米, 粮食, 黑龙江五常, 10kg/袋, 89.9, 500, BATCH-G-001, null, 黑龙江五常有机稻花香大米。, AA, 0, 1, 2026-07-14T19:22:35.018, 2026-07-14 11:22:35
+<==        Row: 3, 新疆库尔勒香梨, 水果, 新疆库尔勒, 4kg/箱, 39.9, 601, BATCH-F-002, null, 新疆库尔勒新疆库尔勒香梨，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 4, 四川爱媛果冻橙, 水果, 四川眉山, 5kg/箱, 45, 685, BATCH-F-003, null, 四川眉山四川爱媛果冻橙，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 5, 广西武鸣沃柑, 水果, 广西武鸣, 5kg/箱, 35.9, 752, BATCH-F-004, null, 广西武鸣广西武鸣沃柑，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 6, 海南金钻凤梨, 水果, 海南海口, 2个/盒, 29.9, 800, BATCH-F-005, null, 海南海口海南金钻凤梨，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 7, 云南冰糖橙, 水果, 云南玉溪, 5kg/箱, 38, 598, BATCH-F-006, null, 云南玉溪云南冰糖橙，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 8, 陕西洛川苹果, 水果, 陕西延安, 5kg/箱, 42, 614, BATCH-F-007, null, 陕西延安陕西洛川苹果，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 9, 浙江仙居杨梅, 水果, 浙江台州, 3kg/箱, 68, 150, BATCH-F-008, null, 浙江台州浙江仙居杨梅，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 10, 广东桂味荔枝, 水果, 广东茂名, 3kg/箱, 55, 537, BATCH-F-009, null, 广东茂名广东桂味荔枝，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 11, 福建平和蜜柚, 水果, 福建漳州, 2个/袋, 25.9, 756, BATCH-F-010, null, 福建漳州福建平和蜜柚，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 12, 新疆哈密瓜, 水果, 新疆吐鲁番, 1个/箱, 32, 371, BATCH-F-011, null, 新疆吐鲁番新疆哈密瓜，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 13, 辽宁巨峰葡萄, 水果, 辽宁大连, 2.5kg/箱, 48, 643, BATCH-F-012, null, 辽宁大连辽宁巨峰葡萄，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 14, 河北赵县雪梨, 水果, 河北赵县, 5kg/箱, 28, 705, BATCH-F-013, null, 河北赵县河北赵县雪梨，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 15, 江西赣南脐橙, 水果, 江西赣州, 5kg/箱, 42, 398, BATCH-F-014, null, 江西赣州江西赣南脐橙，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 16, 甘肃花牛苹果, 水果, 甘肃天水, 5kg/箱, 36, 700, BATCH-F-015, null, 甘肃天水甘肃花牛苹果，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 17, 广西百香果, 水果, 广西玉林, 2.5kg/箱, 33, 653, BATCH-F-016, null, 广西玉林广西百香果，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 18, 海南三亚芒果, 水果, 海南三亚, 3kg/箱, 45, 663, BATCH-F-017, null, 海南三亚海南三亚芒果，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 19, 山东大樱桃, 水果, 山东烟台, 2kg/箱, 78, 504, BATCH-F-018, null, 山东烟台山东大樱桃，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 20, 福建东魁杨梅, 水果, 福建龙海, 2.5kg/箱, 58, 339, BATCH-F-019, null, 福建龙海福建东魁杨梅，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 21, 云南澄江蓝莓, 水果, 云南澄江, 12盒/箱, 88, 451, BATCH-F-020, null, 云南澄江云南澄江蓝莓，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 22, 海南凤梨释迦, 水果, 海南乐东, 2个/盒, 69, 546, BATCH-F-021, null, 海南乐东海南凤梨释迦，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 23, 云南有机蔬菜礼盒, 蔬菜, 云南昆明, 3kg/盒, 68, 740, BATCH-V-001, null, 云南昆明云南有机蔬菜礼盒，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 24, 山东章丘大葱, 蔬菜, 山东济南, 2kg/把, 12.9, 158, BATCH-V-002, null, 山东济南山东章丘大葱，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 25, 河南铁棍山药, 蔬菜, 河南焦作, 2kg/箱, 28, 334, BATCH-V-003, null, 河南焦作河南铁棍山药，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 26, 寿光新鲜黄瓜, 蔬菜, 山东潍坊, 1.5kg/袋, 9.9, 669, BATCH-V-004, null, 山东潍坊寿光新鲜黄瓜，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 27, 甘肃兰州百合, 蔬菜, 甘肃兰州, 500g/袋, 35, 599, BATCH-V-005, null, 甘肃兰州甘肃兰州百合，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 28, 福建古田鲜银耳, 蔬菜, 福建宁德, 300g/袋, 22, 631, BATCH-V-006, null, 福建宁德福建古田鲜银耳，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 29, 四川儿菜, 蔬菜, 四川成都, 2kg/袋, 13, 254, BATCH-V-007, null, 四川成都四川儿菜，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 30, 东北黑木耳, 蔬菜, 黑龙江牡丹江, 250g/袋, 32, 487, BATCH-V-008, null, 黑龙江牡丹江东北黑木耳，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 31, 云南香格里拉松茸, 蔬菜, 云南香格里拉, 500g/盒, 168, 532, BATCH-V-009, null, 云南香格里拉云南香格里拉松茸，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 32, 湖南洞庭湖莲藕, 蔬菜, 湖南洞庭湖, 2.5kg/袋, 15, 341, BATCH-V-010, null, 湖南洞庭湖湖南洞庭湖莲藕，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 33, 海南有机番茄, 蔬菜, 海南三亚, 2kg/袋, 14.9, 741, BATCH-V-011, null, 海南三亚海南有机番茄，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 34, 山东紫甘蓝, 蔬菜, 山东临沂, 1个/袋, 6.5, 714, BATCH-V-012, null, 山东临沂山东紫甘蓝，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 35, 云南甜玉米, 蔬菜, 云南西双版纳, 5根/袋, 15, 494, BATCH-V-013, null, 云南西双版纳云南甜玉米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 36, 河北平泉香菇, 蔬菜, 河北承德, 500g/盒, 18, 492, BATCH-V-014, null, 河北承德河北平泉香菇，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 37, 浙江杭州雷笋, 蔬菜, 浙江杭州, 1.5kg/袋, 22, 419, BATCH-V-015, null, 浙江杭州浙江杭州雷笋，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 38, 广东菜心, 蔬菜, 广东清远, 500g/把, 6, 727, BATCH-V-016, null, 广东清远广东菜心，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 39, 宁夏菜心, 蔬菜, 宁夏银川, 500g/把, 7.5, 660, BATCH-V-017, null, 宁夏银川宁夏菜心，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 40, 江苏徐州芦笋, 蔬菜, 江苏徐州, 500g/盒, 19, 685, BATCH-V-018, null, 江苏徐州江苏徐州芦笋，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 41, 山东有机土豆, 蔬菜, 山东滕州, 2.5kg/袋, 11, 554, BATCH-V-019, null, 山东滕州山东有机土豆，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 42, 湖南红菜苔, 蔬菜, 湖南长沙, 500g/把, 8, 117, BATCH-V-020, null, 湖南长沙湖南红菜苔，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 43, 福建姬松茸, 蔬菜, 福建古田, 300g/盒, 42, 790, BATCH-V-021, null, 福建古田福建姬松茸，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 44, 黑龙江珍珠米, 粮食, 黑龙江佳木斯, 10kg/袋, 55, 357, BATCH-G-002, null, 黑龙江佳木斯黑龙江珍珠米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 45, 吉林小町米, 粮食, 吉林长春, 10kg/袋, 62, 180, BATCH-G-003, null, 吉林长春吉林小町米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 46, 辽宁盘锦大米, 粮食, 辽宁盘锦, 10kg/袋, 58, 789, BATCH-G-004, null, 辽宁盘锦辽宁盘锦大米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 47, 山西沁州黄小米, 粮食, 山西长治, 2.5kg/袋, 32, 345, BATCH-G-005, null, 山西长治山西沁州黄小米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 48, 内蒙古燕麦米, 粮食, 内蒙古赤峰, 2kg/袋, 28, 224, BATCH-G-006, null, 内蒙古赤峰内蒙古燕麦米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 49, 河北张家口藜麦, 粮食, 河北张北, 1kg/袋, 35, 340, BATCH-G-007, null, 河北张北河北张家口藜麦，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 50, 云南红河紫米, 粮食, 云南红河, 2kg/袋, 38, 682, BATCH-G-008, null, 云南红河云南红河紫米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 51, 山东济宁黑米, 粮食, 山东济宁, 2.5kg/袋, 22, 442, BATCH-G-009, null, 山东济宁山东济宁黑米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 52, 河南周口面粉, 粮食, 河南周口, 5kg/袋, 25, 587, BATCH-G-010, null, 河南周口河南周口面粉，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 53, 湖南湘西富硒米, 粮食, 湖南湘西, 5kg/袋, 45, 375, BATCH-G-011, null, 湖南湘西湖南湘西富硒米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 54, 山东玉米糁, 粮食, 山东潍坊, 2kg/袋, 16, 306, BATCH-G-012, null, 山东潍坊山东玉米糁，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 55, 陕西榆林荞麦, 粮食, 陕西榆林, 2kg/袋, 24, 404, BATCH-G-013, null, 陕西榆林陕西榆林荞麦，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 56, 东北有机黄豆, 粮食, 黑龙江黑河, 2.5kg/袋, 28, 315, BATCH-G-014, null, 黑龙江黑河东北有机黄豆，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 57, 内蒙古绿豆, 粮食, 内蒙古通辽, 2kg/袋, 22, 671, BATCH-G-015, null, 内蒙古通辽内蒙古绿豆，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 58, 江西宜春红米, 粮食, 江西宜春, 2.5kg/袋, 30, 713, BATCH-G-016, null, 江西宜春江西宜春红米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 59, 贵州黑糯米, 粮食, 贵州黔东南, 2.5kg/袋, 35, 527, BATCH-G-017, null, 贵州黔东南贵州黑糯米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 60, 安徽糯小米, 粮食, 安徽滁州, 2kg/袋, 26, 613, BATCH-G-018, null, 安徽滁州安徽糯小米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 61, 河北莜麦面, 粮食, 河北张家口, 2.5kg/袋, 22, 745, BATCH-G-019, null, 河北张家口河北莜麦面，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 62, 新疆鹰嘴豆, 粮食, 新疆木垒, 1kg/袋, 32, 364, BATCH-G-020, null, 新疆木垒新疆鹰嘴豆，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 63, 西藏青稞米, 粮食, 西藏日喀则, 2kg/袋, 48, 270, BATCH-G-021, null, 西藏日喀则西藏青稞米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 64, 安溪铁观音（有机）, 茶叶, 福建安溪, 250g/罐, 168, 307, BATCH-T-001, null, 福建安溪安溪铁观音（有机），全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 65, 西湖龙井, 茶叶, 浙江杭州, 250g/罐, 298, 343, BATCH-T-002, null, 浙江杭州西湖龙井，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 66, 云南普洱茶（生）, 茶叶, 云南西双版纳, 357g/饼, 125, 769, BATCH-T-003, null, 云南西双版纳云南普洱茶（生），全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 67, 云南普洱茶（熟）, 茶叶, 云南临沧, 357g/饼, 138, 587, BATCH-T-004, null, 云南临沧云南普洱茶（熟），全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 68, 武夷山大红袍, 茶叶, 福建武夷山, 125g/罐, 198, 215, BATCH-T-005, null, 福建武夷山武夷山大红袍，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 69, 洞庭碧螺春, 茶叶, 江苏苏州, 250g/罐, 268, 638, BATCH-T-006, null, 江苏苏州洞庭碧螺春，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 70, 黄山毛峰, 茶叶, 安徽黄山, 250g/罐, 188, 772, BATCH-T-007, null, 安徽黄山黄山毛峰，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 71, 信阳毛尖, 茶叶, 河南信阳, 250g/罐, 158, 486, BATCH-T-008, null, 河南信阳信阳毛尖，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 72, 六安瓜片, 茶叶, 安徽六安, 250g/罐, 228, 445, BATCH-T-009, null, 安徽六安六安瓜片，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 73, 君山银针, 茶叶, 湖南岳阳, 200g/盒, 268, 295, BATCH-T-010, null, 湖南岳阳君山银针，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 74, 福鼎白毫银针, 茶叶, 福建福鼎, 200g/盒, 358, 406, BATCH-T-011, null, 福建福鼎福鼎白毫银针，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 75, 安化黑茶, 茶叶, 湖南益阳, 500g/饼, 98, 790, BATCH-T-012, null, 湖南益阳安化黑茶，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 76, 祁门红茶, 茶叶, 安徽祁门, 250g/罐, 178, 664, BATCH-T-013, null, 安徽祁门祁门红茶，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 77, 正山小种, 茶叶, 福建武夷山, 250g/罐, 198, 456, BATCH-T-014, null, 福建武夷山正山小种，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 78, 金骏眉, 茶叶, 福建武夷山, 125g/罐, 388, 355, BATCH-T-015, null, 福建武夷山金骏眉，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 79, 四川竹叶青, 茶叶, 四川峨眉山, 200g/盒, 218, 636, BATCH-T-016, null, 四川峨眉山四川竹叶青，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 80, 太平猴魁, 茶叶, 安徽黄山, 200g/盒, 248, 294, BATCH-T-017, null, 安徽黄山太平猴魁，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 81, 安吉白茶, 茶叶, 浙江安吉, 250g/罐, 198, 765, BATCH-T-018, null, 浙江安吉安吉白茶，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 82, 广西六堡茶, 茶叶, 广西梧州, 500g/饼, 108, 264, BATCH-T-019, null, 广西梧州广西六堡茶，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 83, 都匀毛尖, 茶叶, 贵州黔南, 250g/罐, 148, 325, BATCH-T-020, null, 贵州黔南都匀毛尖，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 84, 台湾冻顶乌龙, 茶叶, 福建漳平, 250g/罐, 228, 670, BATCH-T-021, null, 福建漳平台湾冻顶乌龙，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 85, 黑山猪五花肉, 畜禽, 吉林长白山, 500g/盒, 32, 203, BATCH-L-001, null, 吉林长白山黑山猪五花肉，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 86, 散养土鸡, 畜禽, 江西泰和, 1只约1.2kg, 68, 633, BATCH-L-002, null, 江西泰和散养土鸡，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 87, 生态土鸡蛋, 畜禽, 湖南衡阳, 30枚/盒, 45, 649, BATCH-L-003, null, 湖南衡阳生态土鸡蛋，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 88, 宁夏盐池滩羊, 畜禽, 宁夏吴忠, 1kg/盒, 108, 439, BATCH-L-004, null, 宁夏吴忠宁夏盐池滩羊，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 89, 内蒙古科尔沁牛, 畜禽, 内蒙古通辽, 1kg/盒, 88, 179, BATCH-L-005, null, 内蒙古通辽内蒙古科尔沁牛，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 90, 贵州散养鸭, 畜禽, 贵州六盘水, 1只约1.5kg, 56, 744, BATCH-L-006, null, 贵州六盘水贵州散养鸭，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 91, 四川跑山猪排, 畜禽, 四川巴中, 500g/盒, 42, 442, BATCH-L-007, null, 四川巴中四川跑山猪排，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 92, 安徽土鸭蛋, 畜禽, 安徽安庆, 20枚/盒, 36, 204, BATCH-L-008, null, 安徽安庆安徽土鸭蛋，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 93, 青海牦牛肉, 畜禽, 青海玉树, 1kg/盒, 128, 497, BATCH-L-009, null, 青海玉树青海牦牛肉，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 94, 海南文昌鸡, 畜禽, 海南文昌, 1只约1kg, 72, 512, BATCH-L-010, null, 海南文昌海南文昌鸡，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 95, 东北笨鹅, 畜禽, 黑龙江绥化, 1只约2kg, 88, 791, BATCH-L-011, null, 黑龙江绥化东北笨鹅，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 96, 浙江湖羊, 畜禽, 浙江湖州, 1kg/盒, 98, 210, BATCH-L-012, null, 浙江湖州浙江湖羊，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 97, 云南乌骨鸡, 畜禽, 云南楚雄, 1只约1kg, 62, 390, BATCH-L-013, null, 云南楚雄云南乌骨鸡，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 98, 山东乳鸽, 畜禽, 山东济南, 2只/盒, 48, 337, BATCH-L-014, null, 山东济南山东乳鸽，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 99, 广西巴马香猪, 畜禽, 广西河池, 1kg/盒, 78, 447, BATCH-L-015, null, 广西河池广西巴马香猪，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 100, 西藏藏香猪, 畜禽, 西藏林芝, 1kg/盒, 158, 489, BATCH-L-016, null, 西藏林芝西藏藏香猪，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 101, 高邮咸鸭蛋, 畜禽, 江苏高邮, 20枚/盒, 42, 279, BATCH-L-017, null, 江苏高邮高邮咸鸭蛋，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 102, 福建河田鸡, 畜禽, 福建龙岩, 1只约1.2kg, 65, 285, BATCH-L-018, null, 福建龙岩福建河田鸡，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 103, 陕西秦川牛肉, 畜禽, 陕西宝鸡, 1kg/盒, 82, 150, BATCH-L-019, null, 陕西宝鸡陕西秦川牛肉，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 104, 湖北洪湖鸭, 畜禽, 湖北洪湖, 1只约1.5kg, 52, 498, BATCH-L-020, null, 湖北洪湖湖北洪湖鸭，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 105, 广东清远鸡, 畜禽, 广东清远, 1只约1.2kg, 58, 301, BATCH-L-021, null, 广东清远广东清远鸡，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==      Total: 105
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3c0cd31c]
+2026-07-14 20:09:49.736  INFO 19548 --- [nio-8080-exec-4] c.agri.trace.agent.MainCoordinatorAgent  : API Key 有效，使用在线模式（provider=openai, key前缀=sk-or-v1-26d8d5...）
+2026-07-14 20:09:49.742  INFO 19548 --- [nio-8080-exec-4] com.agri.trace.agent.LlmService          : 调用 LLM API: provider=openai, model=deepseek/deepseek-chat, url=https://openrouter.ai/api/v1/chat/completions
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4718ff42] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@79627506 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM product WHERE deleted = 0 AND (status = ?)
+==> Parameters: 1(Integer)
+<==    Columns: total
+<==        Row: 105
+<==      Total: 1
+==>  Preparing: SELECT id,name,category,origin,spec,price,stock,batch_no,image_url,description,trace_level,deleted,status,create_time,update_time FROM product WHERE deleted=0 AND (status = ?) ORDER BY create_time DESC LIMIT ?
+==> Parameters: 1(Integer), 3(Long)
+<==    Columns: id, name, category, origin, spec, price, stock, batch_no, image_url, description, trace_level, deleted, status, create_time, update_time
+<==        Row: 2, 五常有机大米, 粮食, 黑龙江五常, 10kg/袋, 89.9, 500, BATCH-G-001, null, 黑龙江五常有机稻花香大米。, AA, 0, 1, 2026-07-14T19:22:35.018, 2026-07-14 11:22:35
+<==        Row: 1, 山东红富士苹果, 水果, 山东烟台, 5kg/箱, 49.9, 1000, BATCH-F-001, null, 山东烟台红富士苹果，色泽红润，口感脆甜。, AAA, 0, 1, 2026-07-14T19:22:34.990, 2026-07-14 11:22:34
+<==        Row: 3, 新疆库尔勒香梨, 水果, 新疆库尔勒, 4kg/箱, 39.9, 601, BATCH-F-002, null, 新疆库尔勒新疆库尔勒香梨，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==      Total: 3
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4718ff42]
+2026-07-14 20:10:55.412  INFO 19548 --- [nio-8080-exec-4] c.agri.trace.agent.MainCoordinatorAgent  : LLM 在线回答完成
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3ff59220] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@2077240816 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: INSERT INTO agent_dialog ( session_id, question, answer, tool_calls, create_time ) VALUES ( ?, ?, ?, ?, ? )
+==> Parameters: a1aaf42a56e94a12b18d5d830bb889de(String), ??BATCH-V-008?????(String), 您查询的是批次号为 BATCH-V-008 的东北黑木耳的溯源信息。以下是详细信息：
+
+### 产地信息
+- **生产基地**：黑龙江牡丹江生产基地
+- **种植面积**：53亩
+- **土壤类型**：黄壤土
+
+### 种植与加工记录
+1. **种植**：2026年4月11日完成种苗定植。
+2. **施肥**：2026年5月26日施用有机肥500kg/亩。
+3. **灌溉**：2026年6月24日使用智能滴灌系统进行灌溉。
+4. **采收**：2026年7月7日人工挑选采收，并进行分级包装。
+5. **加工**：2026年7月13日进行清洗、分拣、称重和冷链包装。
+
+### 农残检测报告
+检测日期：2026年6月29日，检测机构：农业农村部农产品质量监督检验测试中心。
+- **啶虫脒**：未检出（标准限值：0.05 mg/kg）
+- **氯氰菊酯**：未检出（标准限值：0.20 mg/kg）
+- **多菌灵**：未检出（标准限值：0.10 mg/kg）
+
+所有检测项目均符合国家标准 GB 2763-2021 食品中农药最大残留限量的要求。
+
+### 整体合规性
+该批次的东北黑木耳在农残检测方面完全合规，可以放心食用。
+
+如需进一步了解其他信息，请随时告知！(String), trace_query(String), 2026-07-14T20:10:55.413(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3ff59220]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@770c764e] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1867382873 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT * FROM batch WHERE batch_no = ?
+==> Parameters: BATCH-F-008(String)
+<==    Columns: id, batch_no, product_id, produce_date, harvest_date, quantity, farm_address, farm_area, soil_type, create_time
+<==        Row: 9, BATCH-F-008, 9, 2026-03-10, 2026-07-04, 1557, 浙江台州生产基地, 88亩, 沙壤土, 2026-07-14 19:22:52
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@770c764e]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@566fb714] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@268331671 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT * FROM trace_record WHERE batch_id = ? ORDER BY record_time ASC
+==> Parameters: 9(Long)
+<==    Columns: id, batch_id, record_type, record_time, operator, content, detail, attachment, create_time
+<==        Row: 36, 9, 种植, 2026-03-20, null, 完成浙江仙居杨梅种苗定植, null, null, 2026-07-14 19:22:52
+<==        Row: 37, 9, 施肥, 2026-05-26, null, 施用有机肥500kg/亩, null, null, 2026-07-14 19:22:52
+<==        Row: 38, 9, 灌溉, 2026-06-15, null, 智能滴灌系统灌溉, null, null, 2026-07-14 19:22:52
+<==        Row: 39, 9, 采收, 2026-07-08, null, 人工挑选采收，分级包装, null, null, 2026-07-14 19:22:52
+<==        Row: 40, 9, 加工, 2026-07-13, null, 清洗、分拣、称重、冷链包装, null, null, 2026-07-14 19:22:52
+<==      Total: 5
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@566fb714]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ac67cbe] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1553816600 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT * FROM pesticide_report WHERE batch_id = ?
+==> Parameters: 9(Long)
+<==    Columns: id, batch_id, report_no, test_date, test_organization, item_name, result, standard_limit, unit, is_compliant, create_time
+<==        Row: 25, 9, REP-52129, 2026-07-04, 农业农村部农产品质量监督检验测试中心, 氯氰菊酯, 未检出, 0.20, mg/kg, 1, 2026-07-14 19:22:52
+<==        Row: 26, 9, REP-80753, 2026-07-04, 农业农村部农产品质量监督检验测试中心, 毒死蜱, 未检出, 0.05, mg/kg, 1, 2026-07-14 19:22:52
+<==        Row: 27, 9, REP-78765, 2026-07-04, 农业农村部农产品质量监督检验测试中心, 啶虫脒, 未检出, 0.05, mg/kg, 1, 2026-07-14 19:22:52
+<==      Total: 3
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ac67cbe]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@38b22487] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@2039426748 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM product WHERE deleted = 0 AND (status = ?)
+==> Parameters: 1(Integer)
+<==    Columns: total
+<==        Row: 105
+<==      Total: 1
+==>  Preparing: SELECT id,name,category,origin,spec,price,stock,batch_no,image_url,description,trace_level,deleted,status,create_time,update_time FROM product WHERE deleted=0 AND (status = ?) ORDER BY create_time DESC LIMIT ?
+==> Parameters: 1(Integer), 12(Long)
+<==    Columns: id, name, category, origin, spec, price, stock, batch_no, image_url, description, trace_level, deleted, status, create_time, update_time
+<==        Row: 2, 五常有机大米, 粮食, 黑龙江五常, 10kg/袋, 89.9, 500, BATCH-G-001, null, 黑龙江五常有机稻花香大米。, AA, 0, 1, 2026-07-14T19:22:35.018, 2026-07-14 11:22:35
+<==        Row: 1, 山东红富士苹果, 水果, 山东烟台, 5kg/箱, 49.9, 1000, BATCH-F-001, null, 山东烟台红富士苹果，色泽红润，口感脆甜。, AAA, 0, 1, 2026-07-14T19:22:34.990, 2026-07-14 11:22:34
+<==        Row: 3, 新疆库尔勒香梨, 水果, 新疆库尔勒, 4kg/箱, 39.9, 601, BATCH-F-002, null, 新疆库尔勒新疆库尔勒香梨，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 4, 四川爱媛果冻橙, 水果, 四川眉山, 5kg/箱, 45, 685, BATCH-F-003, null, 四川眉山四川爱媛果冻橙，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 5, 广西武鸣沃柑, 水果, 广西武鸣, 5kg/箱, 35.9, 752, BATCH-F-004, null, 广西武鸣广西武鸣沃柑，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 6, 海南金钻凤梨, 水果, 海南海口, 2个/盒, 29.9, 800, BATCH-F-005, null, 海南海口海南金钻凤梨，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 7, 云南冰糖橙, 水果, 云南玉溪, 5kg/箱, 38, 598, BATCH-F-006, null, 云南玉溪云南冰糖橙，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 8, 陕西洛川苹果, 水果, 陕西延安, 5kg/箱, 42, 614, BATCH-F-007, null, 陕西延安陕西洛川苹果，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 9, 浙江仙居杨梅, 水果, 浙江台州, 3kg/箱, 68, 150, BATCH-F-008, null, 浙江台州浙江仙居杨梅，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 10, 广东桂味荔枝, 水果, 广东茂名, 3kg/箱, 55, 537, BATCH-F-009, null, 广东茂名广东桂味荔枝，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 11, 福建平和蜜柚, 水果, 福建漳州, 2个/袋, 25.9, 756, BATCH-F-010, null, 福建漳州福建平和蜜柚，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 12, 新疆哈密瓜, 水果, 新疆吐鲁番, 1个/箱, 32, 371, BATCH-F-011, null, 新疆吐鲁番新疆哈密瓜，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==      Total: 12
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@38b22487]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@26ec192e] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1676579735 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT id,name,category,origin,spec,price,stock,batch_no,image_url,description,trace_level,deleted,status,create_time,update_time FROM product WHERE id=? AND deleted=0
+==> Parameters: 4(Long)
+<==    Columns: id, name, category, origin, spec, price, stock, batch_no, image_url, description, trace_level, deleted, status, create_time, update_time
+<==        Row: 4, 四川爱媛果冻橙, 水果, 四川眉山, 5kg/箱, 45, 685, BATCH-F-003, null, 四川眉山四川爱媛果冻橙，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@26ec192e]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7c0bcf12] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1925988067 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT id,name,category,origin,spec,price,stock,batch_no,image_url,description,trace_level,deleted,status,create_time,update_time FROM product WHERE id=? AND deleted=0
+==> Parameters: 4(Long)
+<==    Columns: id, name, category, origin, spec, price, stock, batch_no, image_url, description, trace_level, deleted, status, create_time, update_time
+<==        Row: 4, 四川爱媛果冻橙, 水果, 四川眉山, 5kg/箱, 45, 685, BATCH-F-003, null, 四川眉山四川爱媛果冻橙，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7c0bcf12]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@600e6a76] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@533523090 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT COUNT( * ) AS total FROM product WHERE deleted=0
+==> Parameters: 
+<==    Columns: total
+<==        Row: 105
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@600e6a76]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5abeb80a] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@2136300300 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT COUNT( * ) AS total FROM orders
+==> Parameters: 
+<==    Columns: total
+<==        Row: 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5abeb80a]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c9bc34a] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@352005169 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT COUNT( * ) AS total FROM user WHERE deleted=0
+==> Parameters: 
+<==    Columns: total
+<==        Row: 3
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c9bc34a]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3b2aa84c] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1861359902 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT COUNT( * ) AS total FROM agent_dialog
+==> Parameters: 
+<==    Columns: total
+<==        Row: 24
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3b2aa84c]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7057b0ff] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@604386622 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM orders
+==> Parameters: 
+<==    Columns: total
+<==        Row: 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7057b0ff]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@77fe65cd] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1800596738 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT * FROM batch WHERE batch_no = ?
+==> Parameters: BATCH-F-003(String)
+<==    Columns: id, batch_no, product_id, produce_date, harvest_date, quantity, farm_address, farm_area, soil_type, create_time
+<==        Row: 4, BATCH-F-003, 4, 2026-06-05, 2026-07-05, 1913, 四川眉山生产基地, 70亩, 红壤土, 2026-07-14 19:22:52
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@77fe65cd]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@46c39341] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@327501106 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT * FROM trace_record WHERE batch_id = ? ORDER BY record_time ASC
+==> Parameters: 4(Long)
+<==    Columns: id, batch_id, record_type, record_time, operator, content, detail, attachment, create_time
+<==        Row: 11, 4, 种植, 2026-04-02, null, 完成四川爱媛果冻橙种苗定植, null, null, 2026-07-14 19:22:52
+<==        Row: 12, 4, 施肥, 2026-05-20, null, 施用有机肥500kg/亩, null, null, 2026-07-14 19:22:52
+<==        Row: 13, 4, 灌溉, 2026-06-21, null, 智能滴灌系统灌溉, null, null, 2026-07-14 19:22:52
+<==        Row: 14, 4, 采收, 2026-07-07, null, 人工挑选采收，分级包装, null, null, 2026-07-14 19:22:52
+<==        Row: 15, 4, 加工, 2026-07-13, null, 清洗、分拣、称重、冷链包装, null, null, 2026-07-14 19:22:52
+<==      Total: 5
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@46c39341]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@50dcd143] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@950315611 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT * FROM pesticide_report WHERE batch_id = ?
+==> Parameters: 4(Long)
+<==    Columns: id, batch_id, report_no, test_date, test_organization, item_name, result, standard_limit, unit, is_compliant, create_time
+<==        Row: 8, 4, REP-49115, 2026-07-05, 农业农村部农产品质量监督检验测试中心, 毒死蜱, 未检出, 0.05, mg/kg, 1, 2026-07-14 19:22:52
+<==        Row: 9, 4, REP-95257, 2026-07-05, 农业农村部农产品质量监督检验测试中心, 多菌灵, 未检出, 0.10, mg/kg, 1, 2026-07-14 19:22:52
+<==        Row: 10, 4, REP-14045, 2026-07-05, 农业农村部农产品质量监督检验测试中心, 啶虫脒, 未检出, 0.05, mg/kg, 1, 2026-07-14 19:22:52
+<==      Total: 3
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@50dcd143]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3fd6834f] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@2042936695 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM orders
+==> Parameters: 
+<==    Columns: total
+<==        Row: 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3fd6834f]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@50b85957] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1585429808 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT COUNT( * ) AS total FROM product WHERE deleted=0
+==> Parameters: 
+<==    Columns: total
+<==        Row: 105
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@50b85957]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5a403227] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@524465931 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT COUNT( * ) AS total FROM orders
+==> Parameters: 
+<==    Columns: total
+<==        Row: 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5a403227]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@d222755] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1973240595 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT COUNT( * ) AS total FROM user WHERE deleted=0
+==> Parameters: 
+<==    Columns: total
+<==        Row: 3
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@d222755]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7f6d4844] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1667874931 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT COUNT( * ) AS total FROM agent_dialog
+==> Parameters: 
+<==    Columns: total
+<==        Row: 24
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7f6d4844]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1ace856] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1177456903 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM product WHERE deleted = 0 AND (status = ?)
+==> Parameters: 1(Integer)
+<==    Columns: total
+<==        Row: 105
+<==      Total: 1
+==>  Preparing: SELECT id,name,category,origin,spec,price,stock,batch_no,image_url,description,trace_level,deleted,status,create_time,update_time FROM product WHERE deleted=0 AND (status = ?) ORDER BY create_time DESC LIMIT ?
+==> Parameters: 1(Integer), 12(Long)
+<==    Columns: id, name, category, origin, spec, price, stock, batch_no, image_url, description, trace_level, deleted, status, create_time, update_time
+<==        Row: 2, 五常有机大米, 粮食, 黑龙江五常, 10kg/袋, 89.9, 500, BATCH-G-001, null, 黑龙江五常有机稻花香大米。, AA, 0, 1, 2026-07-14T19:22:35.018, 2026-07-14 11:22:35
+<==        Row: 1, 山东红富士苹果, 水果, 山东烟台, 5kg/箱, 49.9, 1000, BATCH-F-001, null, 山东烟台红富士苹果，色泽红润，口感脆甜。, AAA, 0, 1, 2026-07-14T19:22:34.990, 2026-07-14 11:22:34
+<==        Row: 3, 新疆库尔勒香梨, 水果, 新疆库尔勒, 4kg/箱, 39.9, 601, BATCH-F-002, null, 新疆库尔勒新疆库尔勒香梨，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 4, 四川爱媛果冻橙, 水果, 四川眉山, 5kg/箱, 45, 685, BATCH-F-003, null, 四川眉山四川爱媛果冻橙，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 5, 广西武鸣沃柑, 水果, 广西武鸣, 5kg/箱, 35.9, 752, BATCH-F-004, null, 广西武鸣广西武鸣沃柑，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 6, 海南金钻凤梨, 水果, 海南海口, 2个/盒, 29.9, 800, BATCH-F-005, null, 海南海口海南金钻凤梨，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 7, 云南冰糖橙, 水果, 云南玉溪, 5kg/箱, 38, 598, BATCH-F-006, null, 云南玉溪云南冰糖橙，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 8, 陕西洛川苹果, 水果, 陕西延安, 5kg/箱, 42, 614, BATCH-F-007, null, 陕西延安陕西洛川苹果，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 9, 浙江仙居杨梅, 水果, 浙江台州, 3kg/箱, 68, 150, BATCH-F-008, null, 浙江台州浙江仙居杨梅，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 10, 广东桂味荔枝, 水果, 广东茂名, 3kg/箱, 55, 537, BATCH-F-009, null, 广东茂名广东桂味荔枝，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 11, 福建平和蜜柚, 水果, 福建漳州, 2个/袋, 25.9, 756, BATCH-F-010, null, 福建漳州福建平和蜜柚，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 12, 新疆哈密瓜, 水果, 新疆吐鲁番, 1个/箱, 32, 371, BATCH-F-011, null, 新疆吐鲁番新疆哈密瓜，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==      Total: 12
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1ace856]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@15c49b44] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1185053983 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT * FROM batch WHERE batch_no = ?
+==> Parameters: BATCH-F-003(String)
+<==    Columns: id, batch_no, product_id, produce_date, harvest_date, quantity, farm_address, farm_area, soil_type, create_time
+<==        Row: 4, BATCH-F-003, 4, 2026-06-05, 2026-07-05, 1913, 四川眉山生产基地, 70亩, 红壤土, 2026-07-14 19:22:52
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@15c49b44]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5f98caf9] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1775448206 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT * FROM trace_record WHERE batch_id = ? ORDER BY record_time ASC
+==> Parameters: 4(Long)
+<==    Columns: id, batch_id, record_type, record_time, operator, content, detail, attachment, create_time
+<==        Row: 11, 4, 种植, 2026-04-02, null, 完成四川爱媛果冻橙种苗定植, null, null, 2026-07-14 19:22:52
+<==        Row: 12, 4, 施肥, 2026-05-20, null, 施用有机肥500kg/亩, null, null, 2026-07-14 19:22:52
+<==        Row: 13, 4, 灌溉, 2026-06-21, null, 智能滴灌系统灌溉, null, null, 2026-07-14 19:22:52
+<==        Row: 14, 4, 采收, 2026-07-07, null, 人工挑选采收，分级包装, null, null, 2026-07-14 19:22:52
+<==        Row: 15, 4, 加工, 2026-07-13, null, 清洗、分拣、称重、冷链包装, null, null, 2026-07-14 19:22:52
+<==      Total: 5
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5f98caf9]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@58fc884b] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@224615630 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT * FROM pesticide_report WHERE batch_id = ?
+==> Parameters: 4(Long)
+<==    Columns: id, batch_id, report_no, test_date, test_organization, item_name, result, standard_limit, unit, is_compliant, create_time
+<==        Row: 8, 4, REP-49115, 2026-07-05, 农业农村部农产品质量监督检验测试中心, 毒死蜱, 未检出, 0.05, mg/kg, 1, 2026-07-14 19:22:52
+<==        Row: 9, 4, REP-95257, 2026-07-05, 农业农村部农产品质量监督检验测试中心, 多菌灵, 未检出, 0.10, mg/kg, 1, 2026-07-14 19:22:52
+<==        Row: 10, 4, REP-14045, 2026-07-05, 农业农村部农产品质量监督检验测试中心, 啶虫脒, 未检出, 0.05, mg/kg, 1, 2026-07-14 19:22:52
+<==      Total: 3
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@58fc884b]
+2026-07-14 20:13:20.936  INFO 19548 --- [nio-8080-exec-6] c.agri.trace.agent.MainCoordinatorAgent  : 工具 trace_query 调用成功
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@499bd002] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@249318222 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT * FROM batch WHERE batch_no = ?
+==> Parameters: BATCH-F-003(String)
+<==    Columns: id, batch_no, product_id, produce_date, harvest_date, quantity, farm_address, farm_area, soil_type, create_time
+<==        Row: 4, BATCH-F-003, 4, 2026-06-05, 2026-07-05, 1913, 四川眉山生产基地, 70亩, 红壤土, 2026-07-14 19:22:52
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@499bd002]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@538ebf14] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1693875186 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT * FROM pesticide_report WHERE batch_id = ?
+==> Parameters: 4(Long)
+<==    Columns: id, batch_id, report_no, test_date, test_organization, item_name, result, standard_limit, unit, is_compliant, create_time
+<==        Row: 8, 4, REP-49115, 2026-07-05, 农业农村部农产品质量监督检验测试中心, 毒死蜱, 未检出, 0.05, mg/kg, 1, 2026-07-14 19:22:52
+<==        Row: 9, 4, REP-95257, 2026-07-05, 农业农村部农产品质量监督检验测试中心, 多菌灵, 未检出, 0.10, mg/kg, 1, 2026-07-14 19:22:52
+<==        Row: 10, 4, REP-14045, 2026-07-05, 农业农村部农产品质量监督检验测试中心, 啶虫脒, 未检出, 0.05, mg/kg, 1, 2026-07-14 19:22:52
+<==      Total: 3
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@538ebf14]
+2026-07-14 20:13:20.957  INFO 19548 --- [nio-8080-exec-6] c.agri.trace.agent.MainCoordinatorAgent  : 工具 pesticide_analyze 调用成功
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@73faacae] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@521150372 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT id,title,content,category,source,upload_time FROM knowledge_doc
+==> Parameters: 
+<==    Columns: id, title, content, category, source, upload_time
+<==        Row: 1, GB 2763-2021 食品中农药最大残留限量, GB 2763-2021规定了食品中农药的最大残留限量。水果类：毒死蜱≤0.05mg/kg，多菌灵≤0.10mg/kg。蔬菜类：毒死蜱≤0.05mg/kg。粮食类：毒死蜱≤0.05mg/kg。茶叶类：联苯菊酯≤0.01mg/kg。, 法规, null, 2026-07-14 11:22:35
+<==        Row: 2, GB 14881-2013 食品生产通用卫生规范, GB 14881规定了食品生产过程中原料采购、加工、包装、贮存和运输等环节的卫生要求。, 法规, null, 2026-07-14 11:22:35
+<==      Total: 2
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@73faacae]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39c0754d] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1849598060 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT id,name,category,origin,spec,price,stock,batch_no,image_url,description,trace_level,deleted,status,create_time,update_time FROM product WHERE deleted=0
+==> Parameters: 
+<==    Columns: id, name, category, origin, spec, price, stock, batch_no, image_url, description, trace_level, deleted, status, create_time, update_time
+<==        Row: 1, 山东红富士苹果, 水果, 山东烟台, 5kg/箱, 49.9, 1000, BATCH-F-001, null, 山东烟台红富士苹果，色泽红润，口感脆甜。, AAA, 0, 1, 2026-07-14T19:22:34.990, 2026-07-14 11:22:34
+<==        Row: 2, 五常有机大米, 粮食, 黑龙江五常, 10kg/袋, 89.9, 500, BATCH-G-001, null, 黑龙江五常有机稻花香大米。, AA, 0, 1, 2026-07-14T19:22:35.018, 2026-07-14 11:22:35
+<==        Row: 3, 新疆库尔勒香梨, 水果, 新疆库尔勒, 4kg/箱, 39.9, 601, BATCH-F-002, null, 新疆库尔勒新疆库尔勒香梨，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 4, 四川爱媛果冻橙, 水果, 四川眉山, 5kg/箱, 45, 685, BATCH-F-003, null, 四川眉山四川爱媛果冻橙，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 5, 广西武鸣沃柑, 水果, 广西武鸣, 5kg/箱, 35.9, 752, BATCH-F-004, null, 广西武鸣广西武鸣沃柑，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 6, 海南金钻凤梨, 水果, 海南海口, 2个/盒, 29.9, 800, BATCH-F-005, null, 海南海口海南金钻凤梨，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 7, 云南冰糖橙, 水果, 云南玉溪, 5kg/箱, 38, 598, BATCH-F-006, null, 云南玉溪云南冰糖橙，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 8, 陕西洛川苹果, 水果, 陕西延安, 5kg/箱, 42, 614, BATCH-F-007, null, 陕西延安陕西洛川苹果，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 9, 浙江仙居杨梅, 水果, 浙江台州, 3kg/箱, 68, 150, BATCH-F-008, null, 浙江台州浙江仙居杨梅，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 10, 广东桂味荔枝, 水果, 广东茂名, 3kg/箱, 55, 537, BATCH-F-009, null, 广东茂名广东桂味荔枝，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 11, 福建平和蜜柚, 水果, 福建漳州, 2个/袋, 25.9, 756, BATCH-F-010, null, 福建漳州福建平和蜜柚，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 12, 新疆哈密瓜, 水果, 新疆吐鲁番, 1个/箱, 32, 371, BATCH-F-011, null, 新疆吐鲁番新疆哈密瓜，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 13, 辽宁巨峰葡萄, 水果, 辽宁大连, 2.5kg/箱, 48, 643, BATCH-F-012, null, 辽宁大连辽宁巨峰葡萄，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 14, 河北赵县雪梨, 水果, 河北赵县, 5kg/箱, 28, 705, BATCH-F-013, null, 河北赵县河北赵县雪梨，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 15, 江西赣南脐橙, 水果, 江西赣州, 5kg/箱, 42, 398, BATCH-F-014, null, 江西赣州江西赣南脐橙，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 16, 甘肃花牛苹果, 水果, 甘肃天水, 5kg/箱, 36, 700, BATCH-F-015, null, 甘肃天水甘肃花牛苹果，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 17, 广西百香果, 水果, 广西玉林, 2.5kg/箱, 33, 653, BATCH-F-016, null, 广西玉林广西百香果，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 18, 海南三亚芒果, 水果, 海南三亚, 3kg/箱, 45, 663, BATCH-F-017, null, 海南三亚海南三亚芒果，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 19, 山东大樱桃, 水果, 山东烟台, 2kg/箱, 78, 504, BATCH-F-018, null, 山东烟台山东大樱桃，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 20, 福建东魁杨梅, 水果, 福建龙海, 2.5kg/箱, 58, 339, BATCH-F-019, null, 福建龙海福建东魁杨梅，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 21, 云南澄江蓝莓, 水果, 云南澄江, 12盒/箱, 88, 451, BATCH-F-020, null, 云南澄江云南澄江蓝莓，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 22, 海南凤梨释迦, 水果, 海南乐东, 2个/盒, 69, 546, BATCH-F-021, null, 海南乐东海南凤梨释迦，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 23, 云南有机蔬菜礼盒, 蔬菜, 云南昆明, 3kg/盒, 68, 740, BATCH-V-001, null, 云南昆明云南有机蔬菜礼盒，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 24, 山东章丘大葱, 蔬菜, 山东济南, 2kg/把, 12.9, 158, BATCH-V-002, null, 山东济南山东章丘大葱，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 25, 河南铁棍山药, 蔬菜, 河南焦作, 2kg/箱, 28, 334, BATCH-V-003, null, 河南焦作河南铁棍山药，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 26, 寿光新鲜黄瓜, 蔬菜, 山东潍坊, 1.5kg/袋, 9.9, 669, BATCH-V-004, null, 山东潍坊寿光新鲜黄瓜，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 27, 甘肃兰州百合, 蔬菜, 甘肃兰州, 500g/袋, 35, 599, BATCH-V-005, null, 甘肃兰州甘肃兰州百合，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 28, 福建古田鲜银耳, 蔬菜, 福建宁德, 300g/袋, 22, 631, BATCH-V-006, null, 福建宁德福建古田鲜银耳，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 29, 四川儿菜, 蔬菜, 四川成都, 2kg/袋, 13, 254, BATCH-V-007, null, 四川成都四川儿菜，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 30, 东北黑木耳, 蔬菜, 黑龙江牡丹江, 250g/袋, 32, 487, BATCH-V-008, null, 黑龙江牡丹江东北黑木耳，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 31, 云南香格里拉松茸, 蔬菜, 云南香格里拉, 500g/盒, 168, 532, BATCH-V-009, null, 云南香格里拉云南香格里拉松茸，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 32, 湖南洞庭湖莲藕, 蔬菜, 湖南洞庭湖, 2.5kg/袋, 15, 341, BATCH-V-010, null, 湖南洞庭湖湖南洞庭湖莲藕，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 33, 海南有机番茄, 蔬菜, 海南三亚, 2kg/袋, 14.9, 741, BATCH-V-011, null, 海南三亚海南有机番茄，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 34, 山东紫甘蓝, 蔬菜, 山东临沂, 1个/袋, 6.5, 714, BATCH-V-012, null, 山东临沂山东紫甘蓝，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 35, 云南甜玉米, 蔬菜, 云南西双版纳, 5根/袋, 15, 494, BATCH-V-013, null, 云南西双版纳云南甜玉米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 36, 河北平泉香菇, 蔬菜, 河北承德, 500g/盒, 18, 492, BATCH-V-014, null, 河北承德河北平泉香菇，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 37, 浙江杭州雷笋, 蔬菜, 浙江杭州, 1.5kg/袋, 22, 419, BATCH-V-015, null, 浙江杭州浙江杭州雷笋，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 38, 广东菜心, 蔬菜, 广东清远, 500g/把, 6, 727, BATCH-V-016, null, 广东清远广东菜心，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 39, 宁夏菜心, 蔬菜, 宁夏银川, 500g/把, 7.5, 660, BATCH-V-017, null, 宁夏银川宁夏菜心，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 40, 江苏徐州芦笋, 蔬菜, 江苏徐州, 500g/盒, 19, 685, BATCH-V-018, null, 江苏徐州江苏徐州芦笋，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 41, 山东有机土豆, 蔬菜, 山东滕州, 2.5kg/袋, 11, 554, BATCH-V-019, null, 山东滕州山东有机土豆，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 42, 湖南红菜苔, 蔬菜, 湖南长沙, 500g/把, 8, 117, BATCH-V-020, null, 湖南长沙湖南红菜苔，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 43, 福建姬松茸, 蔬菜, 福建古田, 300g/盒, 42, 790, BATCH-V-021, null, 福建古田福建姬松茸，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 44, 黑龙江珍珠米, 粮食, 黑龙江佳木斯, 10kg/袋, 55, 357, BATCH-G-002, null, 黑龙江佳木斯黑龙江珍珠米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 45, 吉林小町米, 粮食, 吉林长春, 10kg/袋, 62, 180, BATCH-G-003, null, 吉林长春吉林小町米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 46, 辽宁盘锦大米, 粮食, 辽宁盘锦, 10kg/袋, 58, 789, BATCH-G-004, null, 辽宁盘锦辽宁盘锦大米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 47, 山西沁州黄小米, 粮食, 山西长治, 2.5kg/袋, 32, 345, BATCH-G-005, null, 山西长治山西沁州黄小米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 48, 内蒙古燕麦米, 粮食, 内蒙古赤峰, 2kg/袋, 28, 224, BATCH-G-006, null, 内蒙古赤峰内蒙古燕麦米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 49, 河北张家口藜麦, 粮食, 河北张北, 1kg/袋, 35, 340, BATCH-G-007, null, 河北张北河北张家口藜麦，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 50, 云南红河紫米, 粮食, 云南红河, 2kg/袋, 38, 682, BATCH-G-008, null, 云南红河云南红河紫米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 51, 山东济宁黑米, 粮食, 山东济宁, 2.5kg/袋, 22, 442, BATCH-G-009, null, 山东济宁山东济宁黑米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 52, 河南周口面粉, 粮食, 河南周口, 5kg/袋, 25, 587, BATCH-G-010, null, 河南周口河南周口面粉，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 53, 湖南湘西富硒米, 粮食, 湖南湘西, 5kg/袋, 45, 375, BATCH-G-011, null, 湖南湘西湖南湘西富硒米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 54, 山东玉米糁, 粮食, 山东潍坊, 2kg/袋, 16, 306, BATCH-G-012, null, 山东潍坊山东玉米糁，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 55, 陕西榆林荞麦, 粮食, 陕西榆林, 2kg/袋, 24, 404, BATCH-G-013, null, 陕西榆林陕西榆林荞麦，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 56, 东北有机黄豆, 粮食, 黑龙江黑河, 2.5kg/袋, 28, 315, BATCH-G-014, null, 黑龙江黑河东北有机黄豆，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 57, 内蒙古绿豆, 粮食, 内蒙古通辽, 2kg/袋, 22, 671, BATCH-G-015, null, 内蒙古通辽内蒙古绿豆，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 58, 江西宜春红米, 粮食, 江西宜春, 2.5kg/袋, 30, 713, BATCH-G-016, null, 江西宜春江西宜春红米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 59, 贵州黑糯米, 粮食, 贵州黔东南, 2.5kg/袋, 35, 527, BATCH-G-017, null, 贵州黔东南贵州黑糯米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 60, 安徽糯小米, 粮食, 安徽滁州, 2kg/袋, 26, 613, BATCH-G-018, null, 安徽滁州安徽糯小米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 61, 河北莜麦面, 粮食, 河北张家口, 2.5kg/袋, 22, 745, BATCH-G-019, null, 河北张家口河北莜麦面，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 62, 新疆鹰嘴豆, 粮食, 新疆木垒, 1kg/袋, 32, 364, BATCH-G-020, null, 新疆木垒新疆鹰嘴豆，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 63, 西藏青稞米, 粮食, 西藏日喀则, 2kg/袋, 48, 270, BATCH-G-021, null, 西藏日喀则西藏青稞米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 64, 安溪铁观音（有机）, 茶叶, 福建安溪, 250g/罐, 168, 307, BATCH-T-001, null, 福建安溪安溪铁观音（有机），全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 65, 西湖龙井, 茶叶, 浙江杭州, 250g/罐, 298, 343, BATCH-T-002, null, 浙江杭州西湖龙井，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 66, 云南普洱茶（生）, 茶叶, 云南西双版纳, 357g/饼, 125, 769, BATCH-T-003, null, 云南西双版纳云南普洱茶（生），全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 67, 云南普洱茶（熟）, 茶叶, 云南临沧, 357g/饼, 138, 587, BATCH-T-004, null, 云南临沧云南普洱茶（熟），全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 68, 武夷山大红袍, 茶叶, 福建武夷山, 125g/罐, 198, 215, BATCH-T-005, null, 福建武夷山武夷山大红袍，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 69, 洞庭碧螺春, 茶叶, 江苏苏州, 250g/罐, 268, 638, BATCH-T-006, null, 江苏苏州洞庭碧螺春，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 70, 黄山毛峰, 茶叶, 安徽黄山, 250g/罐, 188, 772, BATCH-T-007, null, 安徽黄山黄山毛峰，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 71, 信阳毛尖, 茶叶, 河南信阳, 250g/罐, 158, 486, BATCH-T-008, null, 河南信阳信阳毛尖，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 72, 六安瓜片, 茶叶, 安徽六安, 250g/罐, 228, 445, BATCH-T-009, null, 安徽六安六安瓜片，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 73, 君山银针, 茶叶, 湖南岳阳, 200g/盒, 268, 295, BATCH-T-010, null, 湖南岳阳君山银针，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 74, 福鼎白毫银针, 茶叶, 福建福鼎, 200g/盒, 358, 406, BATCH-T-011, null, 福建福鼎福鼎白毫银针，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 75, 安化黑茶, 茶叶, 湖南益阳, 500g/饼, 98, 790, BATCH-T-012, null, 湖南益阳安化黑茶，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 76, 祁门红茶, 茶叶, 安徽祁门, 250g/罐, 178, 664, BATCH-T-013, null, 安徽祁门祁门红茶，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 77, 正山小种, 茶叶, 福建武夷山, 250g/罐, 198, 456, BATCH-T-014, null, 福建武夷山正山小种，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 78, 金骏眉, 茶叶, 福建武夷山, 125g/罐, 388, 355, BATCH-T-015, null, 福建武夷山金骏眉，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 79, 四川竹叶青, 茶叶, 四川峨眉山, 200g/盒, 218, 636, BATCH-T-016, null, 四川峨眉山四川竹叶青，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 80, 太平猴魁, 茶叶, 安徽黄山, 200g/盒, 248, 294, BATCH-T-017, null, 安徽黄山太平猴魁，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 81, 安吉白茶, 茶叶, 浙江安吉, 250g/罐, 198, 765, BATCH-T-018, null, 浙江安吉安吉白茶，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 82, 广西六堡茶, 茶叶, 广西梧州, 500g/饼, 108, 264, BATCH-T-019, null, 广西梧州广西六堡茶，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 83, 都匀毛尖, 茶叶, 贵州黔南, 250g/罐, 148, 325, BATCH-T-020, null, 贵州黔南都匀毛尖，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 84, 台湾冻顶乌龙, 茶叶, 福建漳平, 250g/罐, 228, 670, BATCH-T-021, null, 福建漳平台湾冻顶乌龙，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 85, 黑山猪五花肉, 畜禽, 吉林长白山, 500g/盒, 32, 203, BATCH-L-001, null, 吉林长白山黑山猪五花肉，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 86, 散养土鸡, 畜禽, 江西泰和, 1只约1.2kg, 68, 633, BATCH-L-002, null, 江西泰和散养土鸡，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 87, 生态土鸡蛋, 畜禽, 湖南衡阳, 30枚/盒, 45, 649, BATCH-L-003, null, 湖南衡阳生态土鸡蛋，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 88, 宁夏盐池滩羊, 畜禽, 宁夏吴忠, 1kg/盒, 108, 439, BATCH-L-004, null, 宁夏吴忠宁夏盐池滩羊，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 89, 内蒙古科尔沁牛, 畜禽, 内蒙古通辽, 1kg/盒, 88, 179, BATCH-L-005, null, 内蒙古通辽内蒙古科尔沁牛，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 90, 贵州散养鸭, 畜禽, 贵州六盘水, 1只约1.5kg, 56, 744, BATCH-L-006, null, 贵州六盘水贵州散养鸭，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 91, 四川跑山猪排, 畜禽, 四川巴中, 500g/盒, 42, 442, BATCH-L-007, null, 四川巴中四川跑山猪排，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 92, 安徽土鸭蛋, 畜禽, 安徽安庆, 20枚/盒, 36, 204, BATCH-L-008, null, 安徽安庆安徽土鸭蛋，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 93, 青海牦牛肉, 畜禽, 青海玉树, 1kg/盒, 128, 497, BATCH-L-009, null, 青海玉树青海牦牛肉，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 94, 海南文昌鸡, 畜禽, 海南文昌, 1只约1kg, 72, 512, BATCH-L-010, null, 海南文昌海南文昌鸡，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 95, 东北笨鹅, 畜禽, 黑龙江绥化, 1只约2kg, 88, 791, BATCH-L-011, null, 黑龙江绥化东北笨鹅，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 96, 浙江湖羊, 畜禽, 浙江湖州, 1kg/盒, 98, 210, BATCH-L-012, null, 浙江湖州浙江湖羊，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 97, 云南乌骨鸡, 畜禽, 云南楚雄, 1只约1kg, 62, 390, BATCH-L-013, null, 云南楚雄云南乌骨鸡，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 98, 山东乳鸽, 畜禽, 山东济南, 2只/盒, 48, 337, BATCH-L-014, null, 山东济南山东乳鸽，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 99, 广西巴马香猪, 畜禽, 广西河池, 1kg/盒, 78, 447, BATCH-L-015, null, 广西河池广西巴马香猪，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 100, 西藏藏香猪, 畜禽, 西藏林芝, 1kg/盒, 158, 489, BATCH-L-016, null, 西藏林芝西藏藏香猪，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 101, 高邮咸鸭蛋, 畜禽, 江苏高邮, 20枚/盒, 42, 279, BATCH-L-017, null, 江苏高邮高邮咸鸭蛋，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 102, 福建河田鸡, 畜禽, 福建龙岩, 1只约1.2kg, 65, 285, BATCH-L-018, null, 福建龙岩福建河田鸡，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 103, 陕西秦川牛肉, 畜禽, 陕西宝鸡, 1kg/盒, 82, 150, BATCH-L-019, null, 陕西宝鸡陕西秦川牛肉，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 104, 湖北洪湖鸭, 畜禽, 湖北洪湖, 1只约1.5kg, 52, 498, BATCH-L-020, null, 湖北洪湖湖北洪湖鸭，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 105, 广东清远鸡, 畜禽, 广东清远, 1只约1.2kg, 58, 301, BATCH-L-021, null, 广东清远广东清远鸡，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==      Total: 105
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39c0754d]
+2026-07-14 20:13:21.063  INFO 19548 --- [nio-8080-exec-6] c.agri.trace.agent.MainCoordinatorAgent  : API Key 有效，使用在线模式（provider=openai, key前缀=sk-or-v1-26d8d5...）
+2026-07-14 20:13:21.066  INFO 19548 --- [nio-8080-exec-6] com.agri.trace.agent.LlmService          : 调用 LLM API: provider=openai, model=deepseek/deepseek-chat, url=https://openrouter.ai/api/v1/chat/completions
+2026-07-14 20:13:35.544  INFO 19548 --- [nio-8080-exec-6] c.agri.trace.agent.MainCoordinatorAgent  : LLM 在线回答完成
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@374de89e] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@386440885 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: INSERT INTO agent_dialog ( session_id, question, answer, tool_calls, create_time ) VALUES ( ?, ?, ?, ?, ? )
+==> Parameters: 5cdaedbed67144e99d0be61b82544603(String), BATCH-F-003(String), ### 四川爱媛果冻橙（批次：BATCH-F-003）溯源报告
+
+#### 1. **基础信息**
+- **产地**：四川眉山生产基地（70亩红壤土）
+- **种植时间**：2026年4月2日完成种苗定植
+- **采收时间**：2026年7月7日人工挑选采收
+- **加工时间**：2026年7月13日（清洗、分拣、冷链包装）
+
+#### 2. **农事记录**
+- **施肥**：2026年5月20日施用有机肥（500kg/亩）
+- **灌溉**：2026年6月21日采用智能滴灌系统
+- **品质控制**：全程人工分级包装，冷链保鲜处理
+
+#### 3. **农残检测报告**
+- **检测标准**：GB 2763-2021《食品中农药最大残留限量》
+- **检测机构**：农业农村部农产品质量监督检验测试中心
+- **检测结果**：
+  - 毒死蜱：未检出（限量值≤0.05mg/kg）?
+  - 多菌灵：未检出（限量值≤0.10mg/kg）?
+  - 啶虫脒：未检出（限量值≤0.05mg/kg）?
+- **综合结论**：全部指标符合国家标准，安全评级为**优质**
+
+#### 4. **物流信息**
+- **当前状态**：已完成加工包装，待发货（可通过订单号进一步查询具体物流路径）
+
+#### 5. **商品特点**
+- 果肉细腻多汁，糖酸比均衡，产自四川核心柑橘产区
+- 平台售价：￥45/箱（溯源等级AA）
+
+需要其他信息（如具体物流单号、购买链接等）可随时告知！(String), trace_query(String), 2026-07-14T20:13:35.545(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@374de89e]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6183b1a0] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1211905803 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT * FROM product WHERE name LIKE '%' || ? || '%' AND status = 1 AND deleted = 0
+==> Parameters: 水果(String)
+<==      Total: 0
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6183b1a0]
+2026-07-14 20:15:37.059  INFO 19548 --- [nio-8080-exec-8] c.agri.trace.agent.MainCoordinatorAgent  : 工具 product_recommend 调用成功
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@19daf6ba] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@429969907 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT id,title,content,category,source,upload_time FROM knowledge_doc
+==> Parameters: 
+<==    Columns: id, title, content, category, source, upload_time
+<==        Row: 1, GB 2763-2021 食品中农药最大残留限量, GB 2763-2021规定了食品中农药的最大残留限量。水果类：毒死蜱≤0.05mg/kg，多菌灵≤0.10mg/kg。蔬菜类：毒死蜱≤0.05mg/kg。粮食类：毒死蜱≤0.05mg/kg。茶叶类：联苯菊酯≤0.01mg/kg。, 法规, null, 2026-07-14 11:22:35
+<==        Row: 2, GB 14881-2013 食品生产通用卫生规范, GB 14881规定了食品生产过程中原料采购、加工、包装、贮存和运输等环节的卫生要求。, 法规, null, 2026-07-14 11:22:35
+<==      Total: 2
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@19daf6ba]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@65d26dd6] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1291815432 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: SELECT id,name,category,origin,spec,price,stock,batch_no,image_url,description,trace_level,deleted,status,create_time,update_time FROM product WHERE deleted=0
+==> Parameters: 
+<==    Columns: id, name, category, origin, spec, price, stock, batch_no, image_url, description, trace_level, deleted, status, create_time, update_time
+<==        Row: 1, 山东红富士苹果, 水果, 山东烟台, 5kg/箱, 49.9, 1000, BATCH-F-001, null, 山东烟台红富士苹果，色泽红润，口感脆甜。, AAA, 0, 1, 2026-07-14T19:22:34.990, 2026-07-14 11:22:34
+<==        Row: 2, 五常有机大米, 粮食, 黑龙江五常, 10kg/袋, 89.9, 500, BATCH-G-001, null, 黑龙江五常有机稻花香大米。, AA, 0, 1, 2026-07-14T19:22:35.018, 2026-07-14 11:22:35
+<==        Row: 3, 新疆库尔勒香梨, 水果, 新疆库尔勒, 4kg/箱, 39.9, 601, BATCH-F-002, null, 新疆库尔勒新疆库尔勒香梨，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 4, 四川爱媛果冻橙, 水果, 四川眉山, 5kg/箱, 45, 685, BATCH-F-003, null, 四川眉山四川爱媛果冻橙，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 5, 广西武鸣沃柑, 水果, 广西武鸣, 5kg/箱, 35.9, 752, BATCH-F-004, null, 广西武鸣广西武鸣沃柑，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 6, 海南金钻凤梨, 水果, 海南海口, 2个/盒, 29.9, 800, BATCH-F-005, null, 海南海口海南金钻凤梨，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 7, 云南冰糖橙, 水果, 云南玉溪, 5kg/箱, 38, 598, BATCH-F-006, null, 云南玉溪云南冰糖橙，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 8, 陕西洛川苹果, 水果, 陕西延安, 5kg/箱, 42, 614, BATCH-F-007, null, 陕西延安陕西洛川苹果，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 9, 浙江仙居杨梅, 水果, 浙江台州, 3kg/箱, 68, 150, BATCH-F-008, null, 浙江台州浙江仙居杨梅，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 10, 广东桂味荔枝, 水果, 广东茂名, 3kg/箱, 55, 537, BATCH-F-009, null, 广东茂名广东桂味荔枝，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 11, 福建平和蜜柚, 水果, 福建漳州, 2个/袋, 25.9, 756, BATCH-F-010, null, 福建漳州福建平和蜜柚，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 12, 新疆哈密瓜, 水果, 新疆吐鲁番, 1个/箱, 32, 371, BATCH-F-011, null, 新疆吐鲁番新疆哈密瓜，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 13, 辽宁巨峰葡萄, 水果, 辽宁大连, 2.5kg/箱, 48, 643, BATCH-F-012, null, 辽宁大连辽宁巨峰葡萄，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 14, 河北赵县雪梨, 水果, 河北赵县, 5kg/箱, 28, 705, BATCH-F-013, null, 河北赵县河北赵县雪梨，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 15, 江西赣南脐橙, 水果, 江西赣州, 5kg/箱, 42, 398, BATCH-F-014, null, 江西赣州江西赣南脐橙，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 16, 甘肃花牛苹果, 水果, 甘肃天水, 5kg/箱, 36, 700, BATCH-F-015, null, 甘肃天水甘肃花牛苹果，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 17, 广西百香果, 水果, 广西玉林, 2.5kg/箱, 33, 653, BATCH-F-016, null, 广西玉林广西百香果，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 18, 海南三亚芒果, 水果, 海南三亚, 3kg/箱, 45, 663, BATCH-F-017, null, 海南三亚海南三亚芒果，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 19, 山东大樱桃, 水果, 山东烟台, 2kg/箱, 78, 504, BATCH-F-018, null, 山东烟台山东大樱桃，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 20, 福建东魁杨梅, 水果, 福建龙海, 2.5kg/箱, 58, 339, BATCH-F-019, null, 福建龙海福建东魁杨梅，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 21, 云南澄江蓝莓, 水果, 云南澄江, 12盒/箱, 88, 451, BATCH-F-020, null, 云南澄江云南澄江蓝莓，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 22, 海南凤梨释迦, 水果, 海南乐东, 2个/盒, 69, 546, BATCH-F-021, null, 海南乐东海南凤梨释迦，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 23, 云南有机蔬菜礼盒, 蔬菜, 云南昆明, 3kg/盒, 68, 740, BATCH-V-001, null, 云南昆明云南有机蔬菜礼盒，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 24, 山东章丘大葱, 蔬菜, 山东济南, 2kg/把, 12.9, 158, BATCH-V-002, null, 山东济南山东章丘大葱，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 25, 河南铁棍山药, 蔬菜, 河南焦作, 2kg/箱, 28, 334, BATCH-V-003, null, 河南焦作河南铁棍山药，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 26, 寿光新鲜黄瓜, 蔬菜, 山东潍坊, 1.5kg/袋, 9.9, 669, BATCH-V-004, null, 山东潍坊寿光新鲜黄瓜，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 27, 甘肃兰州百合, 蔬菜, 甘肃兰州, 500g/袋, 35, 599, BATCH-V-005, null, 甘肃兰州甘肃兰州百合，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 28, 福建古田鲜银耳, 蔬菜, 福建宁德, 300g/袋, 22, 631, BATCH-V-006, null, 福建宁德福建古田鲜银耳，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 29, 四川儿菜, 蔬菜, 四川成都, 2kg/袋, 13, 254, BATCH-V-007, null, 四川成都四川儿菜，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 30, 东北黑木耳, 蔬菜, 黑龙江牡丹江, 250g/袋, 32, 487, BATCH-V-008, null, 黑龙江牡丹江东北黑木耳，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 31, 云南香格里拉松茸, 蔬菜, 云南香格里拉, 500g/盒, 168, 532, BATCH-V-009, null, 云南香格里拉云南香格里拉松茸，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 32, 湖南洞庭湖莲藕, 蔬菜, 湖南洞庭湖, 2.5kg/袋, 15, 341, BATCH-V-010, null, 湖南洞庭湖湖南洞庭湖莲藕，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 33, 海南有机番茄, 蔬菜, 海南三亚, 2kg/袋, 14.9, 741, BATCH-V-011, null, 海南三亚海南有机番茄，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 34, 山东紫甘蓝, 蔬菜, 山东临沂, 1个/袋, 6.5, 714, BATCH-V-012, null, 山东临沂山东紫甘蓝，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 35, 云南甜玉米, 蔬菜, 云南西双版纳, 5根/袋, 15, 494, BATCH-V-013, null, 云南西双版纳云南甜玉米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 36, 河北平泉香菇, 蔬菜, 河北承德, 500g/盒, 18, 492, BATCH-V-014, null, 河北承德河北平泉香菇，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 37, 浙江杭州雷笋, 蔬菜, 浙江杭州, 1.5kg/袋, 22, 419, BATCH-V-015, null, 浙江杭州浙江杭州雷笋，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 38, 广东菜心, 蔬菜, 广东清远, 500g/把, 6, 727, BATCH-V-016, null, 广东清远广东菜心，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 39, 宁夏菜心, 蔬菜, 宁夏银川, 500g/把, 7.5, 660, BATCH-V-017, null, 宁夏银川宁夏菜心，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 40, 江苏徐州芦笋, 蔬菜, 江苏徐州, 500g/盒, 19, 685, BATCH-V-018, null, 江苏徐州江苏徐州芦笋，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 41, 山东有机土豆, 蔬菜, 山东滕州, 2.5kg/袋, 11, 554, BATCH-V-019, null, 山东滕州山东有机土豆，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 42, 湖南红菜苔, 蔬菜, 湖南长沙, 500g/把, 8, 117, BATCH-V-020, null, 湖南长沙湖南红菜苔，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 43, 福建姬松茸, 蔬菜, 福建古田, 300g/盒, 42, 790, BATCH-V-021, null, 福建古田福建姬松茸，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 44, 黑龙江珍珠米, 粮食, 黑龙江佳木斯, 10kg/袋, 55, 357, BATCH-G-002, null, 黑龙江佳木斯黑龙江珍珠米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 45, 吉林小町米, 粮食, 吉林长春, 10kg/袋, 62, 180, BATCH-G-003, null, 吉林长春吉林小町米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 46, 辽宁盘锦大米, 粮食, 辽宁盘锦, 10kg/袋, 58, 789, BATCH-G-004, null, 辽宁盘锦辽宁盘锦大米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 47, 山西沁州黄小米, 粮食, 山西长治, 2.5kg/袋, 32, 345, BATCH-G-005, null, 山西长治山西沁州黄小米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 48, 内蒙古燕麦米, 粮食, 内蒙古赤峰, 2kg/袋, 28, 224, BATCH-G-006, null, 内蒙古赤峰内蒙古燕麦米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 49, 河北张家口藜麦, 粮食, 河北张北, 1kg/袋, 35, 340, BATCH-G-007, null, 河北张北河北张家口藜麦，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 50, 云南红河紫米, 粮食, 云南红河, 2kg/袋, 38, 682, BATCH-G-008, null, 云南红河云南红河紫米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 51, 山东济宁黑米, 粮食, 山东济宁, 2.5kg/袋, 22, 442, BATCH-G-009, null, 山东济宁山东济宁黑米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 52, 河南周口面粉, 粮食, 河南周口, 5kg/袋, 25, 587, BATCH-G-010, null, 河南周口河南周口面粉，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 53, 湖南湘西富硒米, 粮食, 湖南湘西, 5kg/袋, 45, 375, BATCH-G-011, null, 湖南湘西湖南湘西富硒米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 54, 山东玉米糁, 粮食, 山东潍坊, 2kg/袋, 16, 306, BATCH-G-012, null, 山东潍坊山东玉米糁，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 55, 陕西榆林荞麦, 粮食, 陕西榆林, 2kg/袋, 24, 404, BATCH-G-013, null, 陕西榆林陕西榆林荞麦，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 56, 东北有机黄豆, 粮食, 黑龙江黑河, 2.5kg/袋, 28, 315, BATCH-G-014, null, 黑龙江黑河东北有机黄豆，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 57, 内蒙古绿豆, 粮食, 内蒙古通辽, 2kg/袋, 22, 671, BATCH-G-015, null, 内蒙古通辽内蒙古绿豆，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 58, 江西宜春红米, 粮食, 江西宜春, 2.5kg/袋, 30, 713, BATCH-G-016, null, 江西宜春江西宜春红米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 59, 贵州黑糯米, 粮食, 贵州黔东南, 2.5kg/袋, 35, 527, BATCH-G-017, null, 贵州黔东南贵州黑糯米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 60, 安徽糯小米, 粮食, 安徽滁州, 2kg/袋, 26, 613, BATCH-G-018, null, 安徽滁州安徽糯小米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 61, 河北莜麦面, 粮食, 河北张家口, 2.5kg/袋, 22, 745, BATCH-G-019, null, 河北张家口河北莜麦面，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 62, 新疆鹰嘴豆, 粮食, 新疆木垒, 1kg/袋, 32, 364, BATCH-G-020, null, 新疆木垒新疆鹰嘴豆，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 63, 西藏青稞米, 粮食, 西藏日喀则, 2kg/袋, 48, 270, BATCH-G-021, null, 西藏日喀则西藏青稞米，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 64, 安溪铁观音（有机）, 茶叶, 福建安溪, 250g/罐, 168, 307, BATCH-T-001, null, 福建安溪安溪铁观音（有机），全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 65, 西湖龙井, 茶叶, 浙江杭州, 250g/罐, 298, 343, BATCH-T-002, null, 浙江杭州西湖龙井，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 66, 云南普洱茶（生）, 茶叶, 云南西双版纳, 357g/饼, 125, 769, BATCH-T-003, null, 云南西双版纳云南普洱茶（生），全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 67, 云南普洱茶（熟）, 茶叶, 云南临沧, 357g/饼, 138, 587, BATCH-T-004, null, 云南临沧云南普洱茶（熟），全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 68, 武夷山大红袍, 茶叶, 福建武夷山, 125g/罐, 198, 215, BATCH-T-005, null, 福建武夷山武夷山大红袍，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 69, 洞庭碧螺春, 茶叶, 江苏苏州, 250g/罐, 268, 638, BATCH-T-006, null, 江苏苏州洞庭碧螺春，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 70, 黄山毛峰, 茶叶, 安徽黄山, 250g/罐, 188, 772, BATCH-T-007, null, 安徽黄山黄山毛峰，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 71, 信阳毛尖, 茶叶, 河南信阳, 250g/罐, 158, 486, BATCH-T-008, null, 河南信阳信阳毛尖，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 72, 六安瓜片, 茶叶, 安徽六安, 250g/罐, 228, 445, BATCH-T-009, null, 安徽六安六安瓜片，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 73, 君山银针, 茶叶, 湖南岳阳, 200g/盒, 268, 295, BATCH-T-010, null, 湖南岳阳君山银针，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 74, 福鼎白毫银针, 茶叶, 福建福鼎, 200g/盒, 358, 406, BATCH-T-011, null, 福建福鼎福鼎白毫银针，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 75, 安化黑茶, 茶叶, 湖南益阳, 500g/饼, 98, 790, BATCH-T-012, null, 湖南益阳安化黑茶，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 76, 祁门红茶, 茶叶, 安徽祁门, 250g/罐, 178, 664, BATCH-T-013, null, 安徽祁门祁门红茶，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 77, 正山小种, 茶叶, 福建武夷山, 250g/罐, 198, 456, BATCH-T-014, null, 福建武夷山正山小种，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 78, 金骏眉, 茶叶, 福建武夷山, 125g/罐, 388, 355, BATCH-T-015, null, 福建武夷山金骏眉，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 79, 四川竹叶青, 茶叶, 四川峨眉山, 200g/盒, 218, 636, BATCH-T-016, null, 四川峨眉山四川竹叶青，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 80, 太平猴魁, 茶叶, 安徽黄山, 200g/盒, 248, 294, BATCH-T-017, null, 安徽黄山太平猴魁，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 81, 安吉白茶, 茶叶, 浙江安吉, 250g/罐, 198, 765, BATCH-T-018, null, 浙江安吉安吉白茶，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 82, 广西六堡茶, 茶叶, 广西梧州, 500g/饼, 108, 264, BATCH-T-019, null, 广西梧州广西六堡茶，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 83, 都匀毛尖, 茶叶, 贵州黔南, 250g/罐, 148, 325, BATCH-T-020, null, 贵州黔南都匀毛尖，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 84, 台湾冻顶乌龙, 茶叶, 福建漳平, 250g/罐, 228, 670, BATCH-T-021, null, 福建漳平台湾冻顶乌龙，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 85, 黑山猪五花肉, 畜禽, 吉林长白山, 500g/盒, 32, 203, BATCH-L-001, null, 吉林长白山黑山猪五花肉，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 86, 散养土鸡, 畜禽, 江西泰和, 1只约1.2kg, 68, 633, BATCH-L-002, null, 江西泰和散养土鸡，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 87, 生态土鸡蛋, 畜禽, 湖南衡阳, 30枚/盒, 45, 649, BATCH-L-003, null, 湖南衡阳生态土鸡蛋，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 88, 宁夏盐池滩羊, 畜禽, 宁夏吴忠, 1kg/盒, 108, 439, BATCH-L-004, null, 宁夏吴忠宁夏盐池滩羊，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 89, 内蒙古科尔沁牛, 畜禽, 内蒙古通辽, 1kg/盒, 88, 179, BATCH-L-005, null, 内蒙古通辽内蒙古科尔沁牛，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 90, 贵州散养鸭, 畜禽, 贵州六盘水, 1只约1.5kg, 56, 744, BATCH-L-006, null, 贵州六盘水贵州散养鸭，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 91, 四川跑山猪排, 畜禽, 四川巴中, 500g/盒, 42, 442, BATCH-L-007, null, 四川巴中四川跑山猪排，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 92, 安徽土鸭蛋, 畜禽, 安徽安庆, 20枚/盒, 36, 204, BATCH-L-008, null, 安徽安庆安徽土鸭蛋，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 93, 青海牦牛肉, 畜禽, 青海玉树, 1kg/盒, 128, 497, BATCH-L-009, null, 青海玉树青海牦牛肉，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 94, 海南文昌鸡, 畜禽, 海南文昌, 1只约1kg, 72, 512, BATCH-L-010, null, 海南文昌海南文昌鸡，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 95, 东北笨鹅, 畜禽, 黑龙江绥化, 1只约2kg, 88, 791, BATCH-L-011, null, 黑龙江绥化东北笨鹅，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 96, 浙江湖羊, 畜禽, 浙江湖州, 1kg/盒, 98, 210, BATCH-L-012, null, 浙江湖州浙江湖羊，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 97, 云南乌骨鸡, 畜禽, 云南楚雄, 1只约1kg, 62, 390, BATCH-L-013, null, 云南楚雄云南乌骨鸡，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 98, 山东乳鸽, 畜禽, 山东济南, 2只/盒, 48, 337, BATCH-L-014, null, 山东济南山东乳鸽，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 99, 广西巴马香猪, 畜禽, 广西河池, 1kg/盒, 78, 447, BATCH-L-015, null, 广西河池广西巴马香猪，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 100, 西藏藏香猪, 畜禽, 西藏林芝, 1kg/盒, 158, 489, BATCH-L-016, null, 西藏林芝西藏藏香猪，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 101, 高邮咸鸭蛋, 畜禽, 江苏高邮, 20枚/盒, 42, 279, BATCH-L-017, null, 江苏高邮高邮咸鸭蛋，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 102, 福建河田鸡, 畜禽, 福建龙岩, 1只约1.2kg, 65, 285, BATCH-L-018, null, 福建龙岩福建河田鸡，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 103, 陕西秦川牛肉, 畜禽, 陕西宝鸡, 1kg/盒, 82, 150, BATCH-L-019, null, 陕西宝鸡陕西秦川牛肉，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 104, 湖北洪湖鸭, 畜禽, 湖北洪湖, 1只约1.5kg, 52, 498, BATCH-L-020, null, 湖北洪湖湖北洪湖鸭，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 105, 广东清远鸡, 畜禽, 广东清远, 1只约1.2kg, 58, 301, BATCH-L-021, null, 广东清远广东清远鸡，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==      Total: 105
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@65d26dd6]
+2026-07-14 20:15:37.161  INFO 19548 --- [nio-8080-exec-8] c.agri.trace.agent.MainCoordinatorAgent  : API Key 有效，使用在线模式（provider=openai, key前缀=sk-or-v1-26d8d5...）
+2026-07-14 20:15:37.162  INFO 19548 --- [nio-8080-exec-8] com.agri.trace.agent.LlmService          : 调用 LLM API: provider=openai, model=deepseek/deepseek-chat, url=https://openrouter.ai/api/v1/chat/completions
+2026-07-14 20:15:51.237  INFO 19548 --- [nio-8080-exec-8] c.agri.trace.agent.MainCoordinatorAgent  : LLM 在线回答完成
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3a31d180] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1689003729 wrapping org.sqlite.jdbc4.JDBC4Connection@7d3e8655] will not be managed by Spring
+==>  Preparing: INSERT INTO agent_dialog ( session_id, question, answer, tool_calls, create_time ) VALUES ( ?, ?, ?, ?, ? )
+==> Parameters: 5cdaedbed67144e99d0be61b82544603(String), 根据现在的季节给我推荐一下应季的水果吧(String), 根据当前季节（夏季），我为您推荐以下应季水果（基于平台商品目录）：
+
+**1. 浙江仙居杨梅（浙江台州）**
+- 价格：￥68/份
+- 特点：6-7月是杨梅最佳赏味期，果肉饱满多汁
+- 溯源等级：AA级（可提供完整种植记录）
+
+**2. 广东桂味荔枝（广东茂名）**
+- 价格：￥55/份
+- 特点：6-7月成熟，核小肉厚带桂花香
+- 特别提示：已通过农残检测（检测报告编号：FR-20230615）
+
+**3. 海南金钻凤梨（海南海口）**
+- 价格：￥29.9/份
+- 特点：夏季持续供应，甜度高纤维少
+- 物流提示：从海南产地直发，常温运输3天可达
+
+**4. 山东大樱桃（山东烟台）**
+- 价格：￥78/份
+- 特点：6月旺季，果实硬度高适合运输
+- 种植方式：大棚种植（农事记录可查）
+
+**5. 福建东魁杨梅（福建龙海）**
+- 价格：￥58/份
+- 特点："杨梅之王"，单果重约20-25克
+- 检测报告：无农残检出（2023年最新批次）
+
+**其他建议：**
+- 若喜欢热带水果，可选择海南三亚芒果（全年供应）
+- 需要耐储存水果推荐新疆哈密瓜（常温保存7天）
+
+需要了解某款水果的详细溯源信息（如具体农残检测数据、种植过程照片等），您可以告诉我具体商品名称。(String), product_recommend(String), 2026-07-14T20:15:51.238(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3a31d180]

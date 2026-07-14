@@ -1,0 +1,415 @@
+package com.agri.trace.config;
+
+import com.agri.trace.entity.*;
+import com.agri.trace.mapper.*;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.stream.Collectors;
+
+@Slf4j
+@Component
+public class DataInitializer implements CommandLineRunner {
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
+    private ProductMapper productMapper;
+
+    @Autowired
+    private BatchMapper batchMapper;
+
+    @Autowired
+    private TraceRecordMapper traceRecordMapper;
+
+    @Autowired
+    private PesticideReportMapper pesticideReportMapper;
+
+    @Autowired
+    private KnowledgeDocMapper knowledgeDocMapper;
+
+    @Override
+    @Transactional
+    public void run(String... args) throws Exception {
+        // 执行建表脚本
+        try {
+            ClassPathResource resource = new ClassPathResource("schema.sql");
+            String sql = new BufferedReader(new InputStreamReader(resource.getInputStream(), StandardCharsets.UTF_8))
+                    .lines().collect(Collectors.joining("\n"));
+
+            // SQLite 不支持多条语句一起执行，按分号分割
+            String[] statements = sql.split(";");
+            for (String stmt : statements) {
+                String trimmed = stmt.trim();
+                if (!trimmed.isEmpty()) {
+                    try {
+                        jdbcTemplate.execute(trimmed);
+                    } catch (Exception e) {
+                        // 忽略个别语句错误
+                        log.debug("SQL执行忽略: {}", e.getMessage());
+                    }
+                }
+            }
+            log.info("数据库表结构初始化完成");
+        } catch (Exception e) {
+            log.warn("建表脚本执行异常: {}", e.getMessage());
+        }
+
+        // 检查是否已有数据
+        if (userMapper.selectCount(null) > 0) {
+            log.info("数据库已有数据，跳过初始化");
+            return;
+        }
+
+        // 插入测试用户
+        insertTestUsers();
+
+        // 插入测试商品和批次
+        insertTestProducts();
+
+        // 插入知识库文档
+        insertKnowledgeDocs();
+
+        log.info("测试数据初始化完成！");
+    }
+
+    private void insertTestUsers() {
+        // 管理员
+        User admin = new User();
+        admin.setUsername("admin");
+        admin.setPassword(passwordEncoder.encode("admin123"));
+        admin.setRealName("系统管理员");
+        admin.setRole("ADMIN");
+        admin.setCreateTime(LocalDateTime.now());
+        userMapper.insert(admin);
+
+        // 消费者
+        User consumer = new User();
+        consumer.setUsername("user");
+        consumer.setPassword(passwordEncoder.encode("user123"));
+        consumer.setRealName("测试消费者");
+        consumer.setRole("CONSUMER");
+        consumer.setCreateTime(LocalDateTime.now());
+        userMapper.insert(consumer);
+
+        // 生产者
+        User producer = new User();
+        producer.setUsername("producer");
+        producer.setPassword(passwordEncoder.encode("prod123"));
+        producer.setRealName("山东果园合作社");
+        producer.setRole("PRODUCER");
+        producer.setCreateTime(LocalDateTime.now());
+        userMapper.insert(producer);
+
+        log.info("测试用户已创建: admin/admin123, user/user123, producer/prod123");
+    }
+
+    private void insertTestProducts() {
+        // 批量插入 100+ 商品（5 大类，每类 20+ 种）
+        insertBatchFruits();
+        insertBatchVegetables();
+        insertBatchGrains();
+        insertBatchTeas();
+        insertBatchLivestocks();
+        log.info("测试商品已创建（共 100+ 种）");
+    }
+
+    private void insertBatchFruits() {
+        String[][] fruits = {
+            {"山东红富士苹果", "水果", "山东烟台", "5kg/箱", "49.90", "BATCH-F-001"},
+            {"新疆库尔勒香梨", "水果", "新疆库尔勒", "4kg/箱", "39.90", "BATCH-F-002"},
+            {"四川爱媛果冻橙", "水果", "四川眉山", "5kg/箱", "45.00", "BATCH-F-003"},
+            {"广西沃柑", "水果", "广西武鸣", "5kg/箱", "35.90", "BATCH-F-004"},
+            {"海南金钻凤梨", "水果", "海南海口", "2个/盒", "29.90", "BATCH-F-005"},
+            {"云南冰糖橙", "水果", "云南玉溪", "5kg/箱", "38.00", "BATCH-F-006"},
+            {"陕西洛川苹果", "水果", "陕西延安", "5kg/箱", "42.00", "BATCH-F-007"},
+            {"浙江仙居杨梅", "水果", "浙江台州", "3kg/箱", "68.00", "BATCH-F-008"},
+            {"广东荔枝（桂味）", "水果", "广东茂名", "3kg/箱", "55.00", "BATCH-F-009"},
+            {"福建平和蜜柚", "水果", "福建漳州", "2个/袋", "25.90", "BATCH-F-010"},
+            {"新疆哈密瓜", "水果", "新疆吐鲁番", "1个/箱", "32.00", "BATCH-F-011"},
+            {"辽宁巨峰葡萄", "水果", "辽宁大连", "2.5kg/箱", "48.00", "BATCH-F-012"},
+            {"河北雪花梨", "水果", "河北赵县", "5kg/箱", "28.00", "BATCH-F-013"},
+            {"江西赣南脐橙", "水果", "江西赣州", "5kg/箱", "42.00", "BATCH-F-014"},
+            {"甘肃花牛苹果", "水果", "甘肃天水", "5kg/箱", "36.00", "BATCH-F-015"},
+            {"广西百香果", "水果", "广西玉林", "2.5kg/箱", "33.00", "BATCH-F-016"},
+            {"海南三亚芒果", "水果", "海南三亚", "3kg/箱", "45.00", "BATCH-F-017"},
+            {"山东大樱桃", "水果", "山东烟台", "2kg/箱", "78.00", "BATCH-F-018"},
+            {"福建东魁杨梅", "水果", "福建龙海", "2.5kg/箱", "58.00", "BATCH-F-019"},
+            {"云南蓝莓", "水果", "云南澄江", "12盒/箱", "88.00", "BATCH-F-020"},
+            {"台湾凤梨释迦", "水果", "海南乐东", "2个/盒", "69.00", "BATCH-F-021"},
+        };
+        for (String[] f : fruits) {
+            createProductWithBatch(f[0], f[1], f[2], f[3], new BigDecimal(f[4]), f[5], "AAA", true);
+        }
+    }
+
+    private void insertBatchVegetables() {
+        String[][] vegs = {
+            {"云南有机蔬菜礼盒", "蔬菜", "云南昆明", "3kg/盒", "68.00", "BATCH-V-001"},
+            {"山东章丘大葱", "蔬菜", "山东济南", "2kg/把", "12.90", "BATCH-V-002"},
+            {"河南铁棍山药", "蔬菜", "河南焦作", "2kg/箱", "28.00", "BATCH-V-003"},
+            {"寿光新鲜黄瓜", "蔬菜", "山东潍坊", "1.5kg/袋", "9.90", "BATCH-V-004"},
+            {"甘肃兰州百合", "蔬菜", "甘肃兰州", "500g/袋", "35.00", "BATCH-V-005"},
+            {"福建古田鲜银耳", "蔬菜", "福建宁德", "300g/袋", "22.00", "BATCH-V-006"},
+            {"四川儿菜", "蔬菜", "四川成都", "2kg/袋", "13.00", "BATCH-V-007"},
+            {"东北黑木耳", "蔬菜", "黑龙江牡丹江", "250g/袋", "32.00", "BATCH-V-008"},
+            {"云南松茸", "蔬菜", "云南香格里拉", "500g/盒", "168.00", "BATCH-V-009"},
+            {"湖南莲藕", "蔬菜", "湖南洞庭湖", "2.5kg/袋", "15.00", "BATCH-V-010"},
+            {"海南有机西红柿", "蔬菜", "海南三亚", "2kg/袋", "14.90", "BATCH-V-011"},
+            {"山东紫甘蓝", "蔬菜", "山东临沂", "1个/袋", "6.50", "BATCH-V-012"},
+            {"云南甜玉米", "蔬菜", "云南西双版纳", "5根/袋", "15.00", "BATCH-V-013"},
+            {"河北平泉香菇", "蔬菜", "河北承德", "500g/盒", "18.00", "BATCH-V-014"},
+            {"浙江雷笋", "蔬菜", "浙江杭州", "1.5kg/袋", "22.00", "BATCH-V-015"},
+            {"广东菜心", "蔬菜", "广东清远", "500g/把", "6.00", "BATCH-V-016"},
+            {"宁夏菜心", "蔬菜", "宁夏银川", "500g/把", "7.50", "BATCH-V-017"},
+            {"江苏芦笋", "蔬菜", "江苏徐州", "500g/盒", "19.00", "BATCH-V-018"},
+            {"山东有机土豆", "蔬菜", "山东滕州", "2.5kg/袋", "11.00", "BATCH-V-019"},
+            {"湖南红菜苔", "蔬菜", "湖南长沙", "500g/把", "8.00", "BATCH-V-020"},
+            {"福建姬松茸", "蔬菜", "福建古田", "300g/盒", "42.00", "BATCH-V-021"},
+        };
+        for (String[] v : vegs) {
+            createProductWithBatch(v[0], v[1], v[2], v[3], new BigDecimal(v[4]), v[5], "AA", true);
+        }
+    }
+
+    private void insertBatchGrains() {
+        String[][] grains = {
+            {"五常有机大米", "粮食", "黑龙江五常", "10kg/袋", "89.90", "BATCH-G-001"},
+            {"黑龙江珍珠米", "粮食", "黑龙江佳木斯", "10kg/袋", "55.00", "BATCH-G-002"},
+            {"吉林小町米", "粮食", "吉林长春", "10kg/袋", "62.00", "BATCH-G-003"},
+            {"辽宁盘锦大米", "粮食", "辽宁盘锦", "10kg/袋", "58.00", "BATCH-G-004"},
+            {"山西沁州黄小米", "粮食", "山西长治", "2.5kg/袋", "32.00", "BATCH-G-005"},
+            {"内蒙古燕麦米", "粮食", "内蒙古赤峰", "2kg/袋", "28.00", "BATCH-G-006"},
+            {"河北藜麦", "粮食", "河北张家口", "1kg/袋", "35.00", "BATCH-G-007"},
+            {"云南紫米", "粮食", "云南红河", "2kg/袋", "38.00", "BATCH-G-008"},
+            {"山东黑米", "粮食", "山东济宁", "2.5kg/袋", "22.00", "BATCH-G-009"},
+            {"河南小麦面粉", "粮食", "河南周口", "5kg/袋", "25.00", "BATCH-G-010"},
+            {"湖南湘西富硒米", "粮食", "湖南湘西", "5kg/袋", "45.00", "BATCH-G-011"},
+            {"山东玉米糁", "粮食", "山东潍坊", "2kg/袋", "16.00", "BATCH-G-012"},
+            {"陕西荞麦米", "粮食", "陕西榆林", "2kg/袋", "24.00", "BATCH-G-013"},
+            {"东北有机黄豆", "粮食", "黑龙江黑河", "2.5kg/袋", "28.00", "BATCH-G-014"},
+            {"内蒙古绿豆", "粮食", "内蒙古通辽", "2kg/袋", "22.00", "BATCH-G-015"},
+            {"江西红米", "粮食", "江西宜春", "2.5kg/袋", "30.00", "BATCH-G-016"},
+            {"贵州黑糯米", "粮食", "贵州黔东南", "2.5kg/袋", "35.00", "BATCH-G-017"},
+            {"安徽糯小米", "粮食", "安徽滁州", "2kg/袋", "26.00", "BATCH-G-018"},
+            {"河北莜麦面", "粮食", "河北张家口", "2.5kg/袋", "22.00", "BATCH-G-019"},
+            {"新疆鹰嘴豆", "粮食", "新疆木垒", "1kg/袋", "32.00", "BATCH-G-020"},
+            {"西藏青稞米", "粮食", "西藏日喀则", "2kg/袋", "48.00", "BATCH-G-021"},
+        };
+        for (String[] g : grains) {
+            createProductWithBatch(g[0], g[1], g[2], g[3], new BigDecimal(g[4]), g[5], "AA", false);
+        }
+    }
+
+    private void insertBatchTeas() {
+        String[][] teas = {
+            {"安溪铁观音（有机）", "茶叶", "福建安溪", "250g/罐", "168.00", "BATCH-T-001"},
+            {"西湖龙井", "茶叶", "浙江杭州", "250g/罐", "298.00", "BATCH-T-002"},
+            {"云南普洱茶（生普）", "茶叶", "云南西双版纳", "357g/饼", "125.00", "BATCH-T-003"},
+            {"云南普洱茶（熟普）", "茶叶", "云南临沧", "357g/饼", "138.00", "BATCH-T-004"},
+            {"武夷山大红袍", "茶叶", "福建武夷山", "125g/罐", "198.00", "BATCH-T-005"},
+            {"洞庭碧螺春", "茶叶", "江苏苏州", "250g/罐", "268.00", "BATCH-T-006"},
+            {"黄山毛峰", "茶叶", "安徽黄山", "250g/罐", "188.00", "BATCH-T-007"},
+            {"信阳毛尖", "茶叶", "河南信阳", "250g/罐", "158.00", "BATCH-T-008"},
+            {"六安瓜片", "茶叶", "安徽六安", "250g/罐", "228.00", "BATCH-T-009"},
+            {"君山银针（黄茶）", "茶叶", "湖南岳阳", "200g/盒", "268.00", "BATCH-T-010"},
+            {"福鼎白茶（白毫银针）", "茶叶", "福建福鼎", "200g/盒", "358.00", "BATCH-T-011"},
+            {"安化黑茶", "茶叶", "湖南益阳", "500g/饼", "98.00", "BATCH-T-012"},
+            {"祁门红茶", "茶叶", "安徽祁门", "250g/罐", "178.00", "BATCH-T-013"},
+            {"正山小种", "茶叶", "福建武夷山", "250g/罐", "198.00", "BATCH-T-014"},
+            {"金骏眉", "茶叶", "福建武夷山", "125g/罐", "388.00", "BATCH-T-015"},
+            {"四川竹叶青", "茶叶", "四川峨眉山", "200g/盒", "218.00", "BATCH-T-016"},
+            {"太平猴魁", "茶叶", "安徽黄山", "200g/盒", "248.00", "BATCH-T-017"},
+            {"安吉白茶", "茶叶", "浙江安吉", "250g/罐", "198.00", "BATCH-T-018"},
+            {"广西六堡茶", "茶叶", "广西梧州", "500g/饼", "108.00", "BATCH-T-019"},
+            {"贵州都匀毛尖", "茶叶", "贵州黔南", "250g/罐", "148.00", "BATCH-T-020"},
+            {"台湾冻顶乌龙", "茶叶", "福建漳平", "250g/罐", "228.00", "BATCH-T-021"},
+        };
+        for (String[] t : teas) {
+            createProductWithBatch(t[0], t[1], t[2], t[3], new BigDecimal(t[4]), t[5], "AAA", true);
+        }
+    }
+
+    private void insertBatchLivestocks() {
+        String[][] livestocks = {
+            {"黑山猪五花肉", "畜禽", "吉林长白山", "500g/盒", "32.00", "BATCH-L-001"},
+            {"散养土鸡", "畜禽", "江西泰和", "1只/箱约1.2kg", "68.00", "BATCH-L-002"},
+            {"生态土鸡蛋", "畜禽", "湖南衡阳", "30枚/盒", "45.00", "BATCH-L-003"},
+            {"宁夏盐池滩羊", "畜禽", "宁夏吴忠", "1kg/盒", "108.00", "BATCH-L-004"},
+            {"内蒙古科尔沁牛肉", "畜禽", "内蒙古通辽", "1kg/盒", "88.00", "BATCH-L-005"},
+            {"贵州散养鸭", "畜禽", "贵州六盘水", "1只/箱约1.5kg", "56.00", "BATCH-L-006"},
+            {"四川跑山猪排骨", "畜禽", "四川巴中", "500g/盒", "42.00", "BATCH-L-007"},
+            {"安徽土鸭蛋", "畜禽", "安徽安庆", "20枚/盒", "36.00", "BATCH-L-008"},
+            {"青海牦牛肉", "畜禽", "青海玉树", "1kg/盒", "128.00", "BATCH-L-009"},
+            {"海南文昌鸡", "畜禽", "海南文昌", "1只/箱约1kg", "72.00", "BATCH-L-010"},
+            {"东北笨鹅", "畜禽", "黑龙江绥化", "1只/箱约2kg", "88.00", "BATCH-L-011"},
+            {"浙江湖羊", "畜禽", "浙江湖州", "1kg/盒", "98.00", "BATCH-L-012"},
+            {"云南乌骨鸡", "畜禽", "云南楚雄", "1只/箱约1kg", "62.00", "BATCH-L-013"},
+            {"山东乳鸽", "畜禽", "山东济南", "2只/盒", "48.00", "BATCH-L-014"},
+            {"广西巴马香猪", "畜禽", "广西河池", "1kg/盒", "78.00", "BATCH-L-015"},
+            {"西藏藏香猪", "畜禽", "西藏林芝", "1kg/盒", "158.00", "BATCH-L-016"},
+            {"江苏高邮咸鸭蛋", "畜禽", "江苏高邮", "20枚/盒", "42.00", "BATCH-L-017"},
+            {"福建河田鸡", "畜禽", "福建龙岩", "1只/箱约1.2kg", "65.00", "BATCH-L-018"},
+            {"陕西秦川牛肉", "畜禽", "陕西宝鸡", "1kg/盒", "82.00", "BATCH-L-019"},
+            {"湖北洪湖鸭", "畜禽", "湖北洪湖", "1只/箱约1.5kg", "52.00", "BATCH-L-020"},
+            {"广东清远鸡", "畜禽", "广东清远", "1只/箱约1.2kg", "58.00", "BATCH-L-021"},
+        };
+        for (String[] l : livestocks) {
+            createProductWithBatch(l[0], l[1], l[2], l[3], new BigDecimal(l[4]), l[5], "AA", true);
+        }
+    }
+
+    private void createProductWithBatch(String name, String category, String origin,
+                                         String spec, BigDecimal price, String batchNo,
+                                         String traceLevel, boolean addRecords) {
+        Product p = new Product();
+        p.setName(name);
+        p.setCategory(category);
+        p.setOrigin(origin);
+        p.setSpec(spec);
+        p.setPrice(price);
+        p.setStock((int)(Math.random() * 500) + 100);
+        p.setBatchNo(batchNo);
+        p.setDescription(String.format("%s%s，全程溯源可查，品质保障。", origin, name));
+        p.setTraceLevel(traceLevel);
+        p.setStatus(1);
+        p.setCreateTime(LocalDateTime.now());
+        productMapper.insert(p);
+
+        Batch b = new Batch();
+        b.setBatchNo(batchNo);
+        b.setProductId(p.getId());
+        b.setProduceDate(LocalDate.now().minusMonths((long)(Math.random() * 6 + 1)));
+        b.setHarvestDate(LocalDate.now().minusDays((long)(Math.random() * 15 + 1)));
+        b.setQuantity((int)(Math.random() * 5000) + 500);
+        b.setFarmAddress(origin + "市" + batchNo.substring(batchNo.length()-3) + "镇生产基地");
+        b.setFarmArea((int)(Math.random() * 80 + 20) + "亩");
+        String[] soilTypes = {"棕壤土", "红壤土", "黑土", "沙壤土", "黄壤土", "水稻土"};
+        b.setSoilType(soilTypes[(int)(Math.random() * soilTypes.length)]);
+        b.setCreateTime(LocalDateTime.now());
+        batchMapper.insert(b);
+
+        if (addRecords) {
+            addTraceRecord(b.getId(), "种植", LocalDate.now().minusMonths(4).toString(), "完成种苗定植与基肥施用");
+            addTraceRecord(b.getId(), "施肥", LocalDate.now().minusMonths(2).toString(), "施用有机肥500kg/亩");
+            addTraceRecord(b.getId(), "灌溉", LocalDate.now().minusMonths(1).toString(), "智能滴灌系统灌溉");
+            addTraceRecord(b.getId(), "采收", LocalDate.now().minusDays(5).toString(), "人工挑选采收，分级包装");
+            addTraceRecord(b.getId(), "加工", LocalDate.now().minusDays(2).toString(), "清洗、分拣、称重、冷链包装");
+
+            // 农残检测（全部达标）
+            String[] items = {"毒死蜱", "多菌灵", "氯氰菊酯", "吡虫啉", "啶虫脒", "联苯菊酯", "哒螨灵", "三环唑"};
+            // 随机选 3-4 项检测
+            int count = (int)(Math.random() * 2) + 3;
+            for (int i = 0; i < count; i++) {
+                int idx = (int)(Math.random() * items.length);
+                String result = Math.random() > 0.9 ? "0.02" : "未检出";
+                addPesticideReport(b.getId(), items[idx], result, "0.05", "mg/kg", true);
+            }
+        }
+    }private void insertKnowledgeDocs() {
+        // GB 2763 法规知识
+        KnowledgeDoc doc1 = new KnowledgeDoc();
+        doc1.setTitle("GB 2763-2021 食品中农药最大残留限量");
+        doc1.setCategory("法规");
+        doc1.setContent("GB 2763-2021规定了食品中农药的最大残留限量。该标准适用于各类食品中农药残留的监督管理。主要限量包括：水果类：毒死蜱≤0.05mg/kg，多菌灵≤0.10mg/kg，氯氰菊酯≤0.20mg/kg；蔬菜类：毒死蜱≤0.05mg/kg，啶虫脒≤0.05mg/kg；粮食类：毒死蜱≤0.05mg/kg，三环唑≤0.10mg/kg；茶叶类：联苯菊酯≤0.01mg/kg，哒螨灵≤0.05mg/kg，氯氰菊酯≤0.02mg/kg。");
+        knowledgeDocMapper.insert(doc1);
+
+        KnowledgeDoc doc2 = new KnowledgeDoc();
+        doc2.setTitle("GB 14881-2013 食品生产通用卫生规范");
+        doc2.setCategory("法规");
+        doc2.setContent("GB 14881-2013规定了食品生产过程中原料采购、加工、包装、贮存和运输等环节的场所、设施、人员的基本卫生要求和管理准则。适用于各类食品的生产，包括农产品的初加工和深加工。");
+        knowledgeDocMapper.insert(doc2);
+
+        KnowledgeDoc doc3 = new KnowledgeDoc();
+        doc3.setTitle("NY/T 391-2013 绿色食品 产地环境质量");
+        doc3.setCategory("标准");
+        doc3.setContent("NY/T 391-2013标准规定了绿色食品产地的环境空气质量、农田灌溉水质、土壤环境质量等要求。适用于绿色食品（包括农产品）的产地环境评价。");
+        knowledgeDocMapper.insert(doc3);
+
+        KnowledgeDoc doc4 = new KnowledgeDoc();
+        doc4.setTitle("农产品溯源管理规范");
+        doc4.setCategory("规范");
+        doc4.setContent("农产品溯源系统应记录从种植/养殖到销售的全链条信息，包括：农事操作记录（施肥、灌溉、喷药）、加工记录、检测报告、物流信息。每批次产品应有唯一溯源编码。溯源信息应至少保存2年。");
+        knowledgeDocMapper.insert(doc4);
+
+        KnowledgeDoc doc5 = new KnowledgeDoc();
+        doc5.setTitle("山东红富士苹果种植技术规范");
+        doc5.setCategory("规范");
+        doc5.setContent("山东红富士苹果种植要点：选用优良品种，合理密植（每亩40-50株）。基肥以有机肥为主（每亩3-5吨），追肥以复合肥为主。病虫害防治以生物防治为主，化学防治为辅，严格遵守安全间隔期。适时采收，果实可溶性固形物含量达到14%以上方可采收。");
+        knowledgeDocMapper.insert(doc5);
+
+        log.info("知识库文档已创建（5条）");
+    }
+}
+
+    private void addTraceRecord(Long batchId, String type, String date, String content) {
+        TraceRecord record = new TraceRecord();
+        record.setBatchId(batchId);
+        record.setRecordType(type);
+        record.setRecordTime(LocalDate.parse(date).atStartOfDay());
+        record.setContent(content);
+        record.setCreateTime(LocalDateTime.now());
+        traceRecordMapper.insert(record);
+    }
+
+    private void addPesticideReport(Long batchId, String item, String result,
+                                     String limit, String unit, boolean compliant) {
+        PesticideReport report = new PesticideReport();
+        report.setBatchId(batchId);
+        report.setReportNo("REP-" + System.currentTimeMillis() + (int)(Math.random() * 1000));
+        report.setTestDate(LocalDate.now());
+        report.setTestOrganization("农业农村部农产品质量监督检验测试中心");
+        report.setItemName(item);
+        report.setResult(result);
+        report.setStandardLimit(limit);
+        report.setUnit(unit);
+        report.setIsCompliant(compliant);
+        report.setCreateTime(LocalDateTime.now());
+        pesticideReportMapper.insert(report);
+    
+    private void addTraceRecord(Long batchId, String type, String date, String content) {
+        TraceRecord record = new TraceRecord();
+        record.setBatchId(batchId);
+        record.setRecordType(type);
+        record.setRecordTime(LocalDate.parse(date).atStartOfDay());
+        record.setContent(content);
+        record.setCreateTime(LocalDateTime.now());
+        traceRecordMapper.insert(record);
+    }
+
+    private void addPesticideReport(Long batchId, String item, String result,
+                                     String limit, String unit, boolean compliant) {
+        PesticideReport report = new PesticideReport();
+        report.setBatchId(batchId);
+        report.setReportNo("REP-" + System.currentTimeMillis() + (int)(Math.random() * 1000));
+        report.setTestDate(LocalDate.now());
+        report.setTestOrganization("农业农村部农产品质量监督检验测试中心");
+        report.setItemName(item);
+        report.setResult(result);
+        report.setStandardLimit(limit);
+        report.setUnit(unit);
+        report.setIsCompliant(compliant);
+        report.setCreateTime(LocalDateTime.now());
+        pesticideReportMapper.insert(report);
+    }
+}
