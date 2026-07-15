@@ -25,13 +25,13 @@ jwt:
   secret: AgriTracePlatform2026SecretKeyForJWTTokenGeneration
   expiration: 86400000
 
-# AI 联网配置
+# AI 联网配置（通过环境变量传入，防止密钥泄露）
 ai:
   model:
-    api-key: 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
-    model-name: deepseek/deepseek-chat
-    base-url: https://openrouter.ai/api/v1
-    provider: openai
+    api-key: ${AI_API_KEY}
+    model-name: ${AI_MODEL:deepseek/deepseek-chat}
+    base-url: ${AI_BASE_URL:https://openrouter.ai/api/v1}
+    provider: ${AI_PROVIDER:openai}
   rag:
     top-k: 5
     similarity-threshold: 0.7

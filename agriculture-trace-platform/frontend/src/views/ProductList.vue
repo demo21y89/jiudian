@@ -1,10 +1,13 @@
-﻿<template>
+<template>
   <div class="page-container">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
       <h1 style="font-size:24px;color:#1a6b3c;">🌾 农产品商城</h1>
-      <el-input v-model="searchKeyword" placeholder="搜索商品..." style="width:300px;" clearable @keyup.enter="handleSearch">
+      <el-input v-model="searchKeyword" placeholder="搜索商品..." style="width:260px;" clearable @keyup.enter="handleSearch">
         <template #prefix><el-icon><Search /></el-icon></template>
       </el-input>
+      <el-button type="primary" @click="handleSearch">
+        <el-icon><Search /></el-icon> 搜索
+      </el-button>
     </div>
 
     <el-tabs v-model="activeCategory" @tab-change="handleCategoryChange" style="margin-bottom:16px;">
@@ -81,6 +84,8 @@ const handleSearch = async () => {
   const res = await productApi.search(searchKeyword.value)
   if (res.code === 200) {
     products.value = res.data
+    total.value = res.data.length
+    page.value = 1
   }
 }
 
