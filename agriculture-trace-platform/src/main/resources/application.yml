@@ -28,12 +28,6 @@ jwt:
 # ============================================
 # AI 联网配置
 # ============================================
-# 支持以下 AI 供应商:
-#   - openai:    https://api.openai.com
-#   - deepseek:  https://api.deepseek.com
-#   - dashscope: https://dashscope.aliyuncs.com (通义千问)
-#   - custom:    自定义 base-url
-#
 # 配置方式（三选一）:
 # 1. 修改下方 api-key 的值
 # 2. 设置环境变量 AI_API_KEY
