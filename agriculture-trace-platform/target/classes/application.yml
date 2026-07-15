@@ -1,0 +1,37 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:sqlite:${DB_PATH:data/trace.db}
+    driver-class-name: org.sqlite.JDBC
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+# JWT配置
+jwt:
+  secret: AgriTracePlatform2026SecretKeyForJWTTokenGeneration
+  expiration: 86400000
+
+# AI 联网配置（通过环境变量传入，防止密钥泄露）
+ai:
+  model:
+    api-key: ${AI_API_KEY}
+    model-name: ${AI_MODEL:deepseek/deepseek-chat}
+    base-url: ${AI_BASE_URL:https://openrouter.ai/api/v1}
+    provider: ${AI_PROVIDER:openai}
+  rag:
+    top-k: 5
+    similarity-threshold: 0.7

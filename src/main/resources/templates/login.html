@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>登录 — AgriTrace</title><link rel="stylesheet" href="/css/app.css"></head>
+<body>
+<div class="auth-page"><div class="auth-card"><div class="ai">🌾</div><h1>欢迎回来</h1><p class="sub">登录 AgriTrace 农产品AI溯源平台</p>
+<form id="lf"><div class="form-group"><label class="form-label">用户名</label><input class="form-input" type="text" id="lun" placeholder="请输入用户名" required></div>
+<div class="form-group"><label class="form-label">密码</label><input class="form-input" type="password" id="lpw" placeholder="请输入密码" required></div>
+<div style="display:flex;justify-content:space-between;font-size:12px;color:#a3957c;margin-bottom:18px"><label><input type="checkbox" style="margin-right:4px">记住登录</label><a href="#">忘记密码？</a></div>
+<button type="submit" class="btn w-full" style="justify-content:center;padding:12px;background:linear-gradient(135deg,#2d5a27,#4a7c3f);color:#fff;box-shadow:0 4px 14px rgba(45,90,39,.25)">登 录</button></form>
+<div style="text-align:center;margin-top:18px;font-size:13px;color:#a3957c">还没有账号？<a href="/page/register">立即注册</a></div>
+<div style="text-align:center;margin-top:12px;font-size:11px;color:#a3957c">演示账号：consumer_demo / 123456</div>
+</div></div>
+<script src="/js/app.js"></script>
+<script>
+document.getElementById("lf").addEventListener("submit",async e=>{e.preventDefault();try{let r=await fetch("/api/v1/auth/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({username:document.getElementById("lun").value,password:document.getElementById("lpw").value})});if(!r.ok){let er=await r.json().catch(()=>({}));throw new Error(er.message||"登录失败")}let d=await r.json();$.login(d.data.user,d.data.token);Toast.ok("登录成功！");let role=d.data.user.role;if(role==="ADMIN")window.location.href="/page/admin";else if(role==="FARMER")window.location.href="/page/farmer";else if(role==="DISTRIBUTOR")window.location.href="/page/distributor";else window.location.href="/page/consumer"}catch(er){Toast.err(er.message)}});
+</script></body></html>

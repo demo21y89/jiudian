@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>注册 — AgriTrace</title><link rel="stylesheet" href="/css/app.css"></head>
+<body>
+<div class="auth-page"><div class="auth-card"><div class="ai">🌱</div><h1>创建账号</h1><p class="sub">加入 AgriTrace，开启AI溯源之旅</p>
+<form id="rf"><div class="form-group"><label class="form-label">用户名</label><input class="form-input" type="text" id="run" placeholder="4-20位字母或数字" required></div>
+<div class="form-group"><label class="form-label">昵称</label><input class="form-input" type="text" id="rnn" placeholder="您的称呼"></div>
+<div class="form-group"><label class="form-label">密码</label><input class="form-input" type="password" id="rpw" placeholder="至少6位密码" required></div>
+<div class="form-group"><label class="form-label">选择身份</label><select class="form-select" id="rrl"><option value="CONSUMER">🛒 消费者 — 购买溯源农产品</option><option value="FARMER">👨‍🌾 农户 — 上架管理商品</option><option value="DISTRIBUTOR">🚚 分销商 — 订单配送管理</option></select></div>
+<button type="submit" class="btn w-full" style="justify-content:center;padding:12px;background:linear-gradient(135deg,#2d5a27,#4a7c3f);color:#fff;box-shadow:0 4px 14px rgba(45,90,39,.25)">注 册</button></form>
+<div style="text-align:center;margin-top:18px;font-size:13px;color:#a3957c">已有账号？<a href="/page/login">去登录</a></div></div></div>
+<script src="/js/app.js"></script>
+<script>
+document.getElementById("rf").addEventListener("submit",async e=>{e.preventDefault();try{let body={username:document.getElementById("run").value,password:document.getElementById("rpw").value,nickname:document.getElementById("rnn").value,role:document.getElementById("rrl").value};let r=await fetch("/api/v1/auth/register",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});if(!r.ok){let er=await r.json().catch(()=>({}));throw new Error(er.message||"注册失败")}let d=await r.json();$.login(d.data.user,d.data.token);Toast.ok("注册成功！");if(body.role==="FARMER")window.location.href="/page/farmer";else if(body.role==="DISTRIBUTOR")window.location.href="/page/distributor";else window.location.href="/page/consumer"}catch(er){Toast.err(er.message)}});
+</script></body></html>

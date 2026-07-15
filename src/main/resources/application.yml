@@ -1,0 +1,43 @@
+﻿server:
+  port: 8080
+
+spring:
+  application:
+    name: agri-trace-platform
+  profiles:
+    active: h2
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 20MB
+
+  cache:
+    type: simple
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+
+logging:
+  level:
+    com.agritrace: DEBUG
+
+blockchain:
+  enabled: false
+
+app:
+  name: AI Agent 农产品溯源智能交易平台
+  version: 1.0.0
+  agent:
+    max-tokens: 4096
+    temperature: 0.3
+    max-session-history: 20
+  ai:
+    enabled: true
+    base-url: https://api.deepseek.com/v1
+    api-key: sk-827e65009cd04160b83502de312b588c
+    model: deepseek-chat
+    max-tokens: 2048
+    temperature: 0.3
