@@ -1,0 +1,49 @@
+# Java
+target/
+*.class
+*.jar
+*.war
+*.log
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Database (keep schema, ignore data)
+data/*.db
+data/*.mv.db
+data/*.trace.db
+
+# Environment
+.env
+*.env.local
+
+# Logs
+*.log
+backend_out.log
+backend_err.log
+frontend.log
+frontend_err.log
+maven_build.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Temp
+temp/
+*.bak

@@ -524,3 +524,38 @@ JDBC Connection [HikariProxyConnection@655870729 wrapping org.sqlite.jdbc4.JDBC4
 如需其他帮助（如购买链接、养殖方式详情等），请随时告知！(String), trace_query(String), 2026-07-14T21:02:20.182(LocalDateTime)
 <==    Updates: 1
 Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@18f236cf]
+2026-07-15 08:11:59.060  WARN 10328 --- [l-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10h56m239ms846?s).
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@61042d13] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1045399410 wrapping org.sqlite.jdbc4.JDBC4Connection@e222af0] will not be managed by Spring
+==>  Preparing: SELECT * FROM user WHERE username = ? AND deleted = 0
+==> Parameters: user(String)
+<==    Columns: id, username, password, real_name, phone, role, avatar, deleted, create_time, update_time
+<==        Row: 2, user, $2a$10$Fo/92T5R0ZczT2tPvh37oudP52w0hka1eEFK.0C7tCDEYvM2viU/6, 测试消费者, null, CONSUMER, null, 0, 2026-07-14T19:22:34.859, 2026-07-14 11:22:34
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@61042d13]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@64c5557b] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1683619125 wrapping org.sqlite.jdbc4.JDBC4Connection@e222af0] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM product WHERE deleted = 0 AND (status = ?)
+==> Parameters: 1(Integer)
+<==    Columns: total
+<==        Row: 105
+<==      Total: 1
+==>  Preparing: SELECT id,name,category,origin,spec,price,stock,batch_no,image_url,description,trace_level,deleted,status,create_time,update_time FROM product WHERE deleted=0 AND (status = ?) ORDER BY create_time DESC LIMIT ?
+==> Parameters: 1(Integer), 12(Long)
+<==    Columns: id, name, category, origin, spec, price, stock, batch_no, image_url, description, trace_level, deleted, status, create_time, update_time
+<==        Row: 2, 五常有机大米, 粮食, 黑龙江五常, 10kg/袋, 89.9, 500, BATCH-G-001, null, 黑龙江五常有机稻花香大米。, AA, 0, 1, 2026-07-14T19:22:35.018, 2026-07-14 11:22:35
+<==        Row: 1, 山东红富士苹果, 水果, 山东烟台, 5kg/箱, 49.9, 1000, BATCH-F-001, null, 山东烟台红富士苹果，色泽红润，口感脆甜。, AAA, 0, 1, 2026-07-14T19:22:34.990, 2026-07-14 11:22:34
+<==        Row: 3, 新疆库尔勒香梨, 水果, 新疆库尔勒, 4kg/箱, 39.9, 601, BATCH-F-002, null, 新疆库尔勒新疆库尔勒香梨，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 4, 四川爱媛果冻橙, 水果, 四川眉山, 5kg/箱, 45, 685, BATCH-F-003, null, 四川眉山四川爱媛果冻橙，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 5, 广西武鸣沃柑, 水果, 广西武鸣, 5kg/箱, 35.9, 752, BATCH-F-004, null, 广西武鸣广西武鸣沃柑，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 6, 海南金钻凤梨, 水果, 海南海口, 2个/盒, 29.9, 800, BATCH-F-005, null, 海南海口海南金钻凤梨，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 7, 云南冰糖橙, 水果, 云南玉溪, 5kg/箱, 38, 598, BATCH-F-006, null, 云南玉溪云南冰糖橙，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 8, 陕西洛川苹果, 水果, 陕西延安, 5kg/箱, 42, 614, BATCH-F-007, null, 陕西延安陕西洛川苹果，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 9, 浙江仙居杨梅, 水果, 浙江台州, 3kg/箱, 68, 150, BATCH-F-008, null, 浙江台州浙江仙居杨梅，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 10, 广东桂味荔枝, 水果, 广东茂名, 3kg/箱, 55, 537, BATCH-F-009, null, 广东茂名广东桂味荔枝，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 11, 福建平和蜜柚, 水果, 福建漳州, 2个/袋, 25.9, 756, BATCH-F-010, null, 福建漳州福建平和蜜柚，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==        Row: 12, 新疆哈密瓜, 水果, 新疆吐鲁番, 1个/箱, 32, 371, BATCH-F-011, null, 新疆吐鲁番新疆哈密瓜，全程溯源可查，品质保障。, AA, 0, 1, 2026-07-14 19:22:52, 2026-07-14 19:22:52
+<==      Total: 12
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@64c5557b]
