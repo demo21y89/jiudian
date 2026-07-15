@@ -51,7 +51,6 @@ com\agri\trace\dto\R.class
 com\agri\trace\entity\User.class
 com\agri\trace\security\JwtAuthenticationFilter.class
 com\agri\trace\mapper\BatchMapper.class
-com\agri\trace\config\CustomIdGenerator.class
 com\agri\trace\service\impl\OrderServiceImpl.class
 com\agri\trace\dto\LoginResponse.class
 com\agri\trace\mapper\OrderMapper.class

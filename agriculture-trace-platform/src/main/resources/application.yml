@@ -28,7 +28,7 @@ jwt:
 # AI 联网配置（通过环境变量传入，防止密钥泄露）
 ai:
   model:
-    api-key: ${AI_API_KEY}
+    api-key: ${AI_API_KEY:}
     model-name: ${AI_MODEL:deepseek/deepseek-chat}
     base-url: ${AI_BASE_URL:https://openrouter.ai/api/v1}
     provider: ${AI_PROVIDER:openai}

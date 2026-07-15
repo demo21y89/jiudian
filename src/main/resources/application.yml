@@ -1,43 +1,37 @@
-﻿server:
+server:
   port: 8080
 
 spring:
-  application:
-    name: agri-trace-platform
-  profiles:
-    active: h2
+  datasource:
+    url: jdbc:sqlite:${DB_PATH:data/trace.db}
+    driver-class-name: org.sqlite.JDBC
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
 
-  servlet:
-    multipart:
-      max-file-size: 10MB
-      max-request-size: 20MB
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
 
-  cache:
-    type: simple
+# JWT配置
+jwt:
+  secret: AgriTracePlatform2026SecretKeyForJWTTokenGeneration
+  expiration: 86400000
 
-  thymeleaf:
-    prefix: classpath:/templates/
-    suffix: .html
-    cache: false
-
-logging:
-  level:
-    com.agritrace: DEBUG
-
-blockchain:
-  enabled: false
-
-app:
-  name: AI Agent 农产品溯源智能交易平台
-  version: 1.0.0
-  agent:
-    max-tokens: 4096
-    temperature: 0.3
-    max-session-history: 20
-  ai:
-    enabled: true
-    base-url: https://api.deepseek.com/v1
-    api-key: sk-827e65009cd04160b83502de312b588c
-    model: deepseek-chat
-    max-tokens: 2048
-    temperature: 0.3
+# AI 联网配置（通过环境变量传入，防止密钥泄露）
+ai:
+  model:
+    api-key: ${AI_API_KEY:}
+    model-name: ${AI_MODEL:deepseek/deepseek-chat}
+    base-url: ${AI_BASE_URL:https://openrouter.ai/api/v1}
+    provider: ${AI_PROVIDER:openai}
+  rag:
+    top-k: 5
+    similarity-threshold: 0.7
