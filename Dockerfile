@@ -1,4 +1,3 @@
-# build: 20260716
 # 第1步：构建前端
 FROM node:18-alpine AS frontend-builder
 WORKDIR /app/frontend
@@ -20,6 +19,8 @@ RUN mvn clean package -DskipTests -B
 # 第3步：运行
 FROM eclipse-temurin:17-jre
 WORKDIR /app
+RUN mkdir -p /app/data
 COPY --from=builder /app/target/*.jar app.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENV PORT=8080
+ENTRYPOINT ["java", "-Dserver.port=${PORT}", "-jar", "app.jar"]
