@@ -5,4 +5,5 @@ data/
 *.log
 *.bat
 *.py
-frontend/
+frontend/node_modules
+frontend/dist
