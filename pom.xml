@@ -19,7 +19,7 @@
     <description>AI Agent 农产品溯源智能交易平台</description>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <mybatis-plus.version>3.5.5</mybatis-plus.version>
         <langchain4j.version>0.30.0</langchain4j.version>
