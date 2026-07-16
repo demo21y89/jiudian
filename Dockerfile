@@ -1,3 +1,4 @@
+# build: 20260716
 # 第1步：构建前端
 FROM node:18-alpine AS frontend-builder
 WORKDIR /app/frontend
@@ -13,6 +14,7 @@ COPY pom.xml .
 RUN mvn dependency:go-offline -B
 COPY src ./src
 COPY --from=frontend-builder /app/frontend/dist ./src/main/resources/static
+RUN find src -name "*.java" -exec sed -i '1s/^\xEF\xBB\xBF//' {} \;
 RUN mvn clean package -DskipTests -B
 
 # 第3步：运行
