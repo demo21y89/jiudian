@@ -1,0 +1,8 @@
+target/
+.git/
+.idea/
+data/
+*.log
+*.bat
+*.py
+frontend/
