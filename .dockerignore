@@ -1,0 +1,10 @@
+target/
+.git/
+.idea/
+data/
+*.log
+*.bat
+*.py
+frontend/node_modules
+frontend/dist
+src/main/java/com/agritrace/
